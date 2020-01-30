@@ -4,8 +4,11 @@ import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import {token$, updateToken} from './store';
+import { MdAssignmentTurnedIn } from "react-icons/md";
 import jwt from "jsonwebtoken";
+import { css } from "glamor";
 import Form from './Form';
+
 
 
 class Login extends React.Component {
@@ -72,19 +75,49 @@ class Login extends React.Component {
           errorMsg = 'Invalid login values';
         }
 
+        let icon = css({
+          width: "80px",
+          height: "80px",
+          backgroundColor: "#1FA70C",
+          borderRadius: "50%",
+          padding: "20px",
+          marginBottom: "30px",
+      })
+
+        let textH3 = css ({
+          color: "#1FA70C",
+          fontSize: "15px",
+          marginBottom: "0px",
+        })
+
+        let pText = css ({
+          fontSize: "13px",
+          color: "#737373",
+        })
+
+        let pTextSpan = css ({
+          color: "green",
+          fontWeight: "bold",
+          ":hover": {
+            color: "#0c6845",
+          }
+        })
+
 
         return (<div className ="login-box">
                     <Helmet>
                           <title>Log In Account</title>
                     </Helmet>
                     {errorMsg}
-                    <h1>Log In!</h1>
+                    <h1>DoToDo App</h1>
+                    <MdAssignmentTurnedIn color="white" className={icon}/>
+                    <h3 className={textH3}>Please log in using your email and password!</h3>
                     <Form
                          onSubmit = {this.onSubmit} 
                          email = {this.state.email} onChangeEmail = {this.onChangeEmail}
                          password = {this.state.password} onChangePass = {this.onChangePass}
                     />
-                    <p>Don't have an accout? <Link to="/register">Register here!</Link></p>
+                    <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
                  </div>
         )
       }

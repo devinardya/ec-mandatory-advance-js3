@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from "glamor";
 
+
 class Form extends React.Component {
 
     constructor(props){
@@ -26,27 +27,32 @@ class Form extends React.Component {
 
     render(){
         let rule = css({
-            color: 'red',
-            width: "100px",
-            height: "30px", 
+            color: 'white',
+            fontWeight: "bold",
+            fontSize: "13px",
+            width: "311px",
+            height: "40px", 
             marginTop: "20px",
             border: "none",
+            backgroundColor: "#1FA70C",
             ':hover': {
-              color: 'pink'
+              backgroundColor: "#0c6845",
+              cursor: "pointer",
             },
           })
 
         let input = css({
             width: "300px",
-            height: "30px",
+            height: "40px",
             paddingLeft: "10px",
             margin: "10px 0",
             borderTop: "none",
             borderLeft: "none",
             borderRight: "none",
-            borderBottom: "1px dotted cadetblue",
+            borderBottom: "2px dotted cadetblue",
             backgroundColor: "#F2F2F2"
         })
+
 
         return ( <>
                     <form onSubmit = {this.onSubmit}>
