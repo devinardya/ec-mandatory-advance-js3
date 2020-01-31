@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { MdCheck } from "react-icons/md";
+import { MdAssignmentTurnedIn } from "react-icons/md";
 import { css } from "glamor";
 import Form from './Form';
 
@@ -67,20 +67,22 @@ class Register extends React.Component {
         })
   
           let textH3 = css ({
-            color: "white",
+            color: "rgba(21,71,60,1)",
             fontSize: "23px",
-            marginBottom: "0px",
+            marginBottom: "20px",
             width: "320px",
-          lineHeight: "20px",
+            fontFamily: 'Montserrat',
+            fontWeight: "bold",
+            lineHeight: "20px",
           })
-  
+
           let pText = css ({
             fontSize: "13px",
-            color: "#EEEEEE",
+            color: "#737373",
           })
-  
+
           let pTextSpan = css ({
-            color: "#FFB200",
+            color: "orangered",
             fontWeight: "bold",
             ":hover": {
               color: "#FF8B00",
@@ -91,17 +93,22 @@ class Register extends React.Component {
                     <Helmet>
                           <title>Create Account</title>
                     </Helmet>
-                    <h1>Welcome to doToDo</h1>
-                    <MdCheck color="#0a968b" className={icon}/>
-                    <h3 className={textH3}>Create Account</h3>
-                    {errorMsg}
-                    <Form
-                         onSubmit = {this.onSubmit} 
-                         email = {this.state.email} onChangeEmail = {this.onChangeEmail}
-                         password = {this.state.password} onChangePass = {this.onChangePass}
-                         textContent = "Create Account"
-                    />
-                    <p className={pText}>Already have an account? <span><Link to="/login"  className={pTextSpan}>Login here!</Link></span></p>
+                    <div className="box-left">
+                           <h1>Welcome</h1>
+                            <MdAssignmentTurnedIn color="#0a968b" className={icon}/>
+                            <h1>doToDo</h1>
+                        </div>
+                        <div className="box-right">
+                            <h3 className={textH3}>Create Account</h3>
+                            {errorMsg}
+                            <Form
+                                onSubmit = {this.onSubmit} 
+                                email = {this.state.email} onChangeEmail = {this.onChangeEmail}
+                                password = {this.state.password} onChangePass = {this.onChangePass}
+                                textContent = "Create Account"
+                            />
+                            <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>
+                        </div>
                 </div>
                 )
     }

@@ -42,6 +42,8 @@ class Todo extends React.Component {
 
         if (this.state.token){
             this.onGetData();
+        }else {
+          this.setState({token: null})
         }
         
       }
@@ -136,14 +138,16 @@ class Todo extends React.Component {
             //console.log("not undefined");
             datas.push(this.state.data)
             //console.log(datas[0]);
+            let button;
+            if(this.state.radioBtn){
+              button = <MdRadioButtonChecked />
+          } else {
+              button = <MdRadioButtonUnchecked />
+          }
 
             printData = datas[0].map(data => {
-              let button;
-              if(this.state.radioBtn){
-                  button = <MdRadioButtonChecked />
-              } else {
-                  button = <MdRadioButtonUnchecked />
-              }
+              
+             
               return (<li key= {data.id}>
                           <span className="list-radioBtn" onClick={() => this.radioBtnChange()}>
                               {button}
@@ -177,7 +181,7 @@ class Todo extends React.Component {
                       <div className="content-top">
                         <h2>YOUR TO DO LIST</h2>
                         <form onSubmit = {this.onSubmit}>
-                            <input type="text" onChange= {this.onChange} value={this.state.input}  />
+                            <input type="text" onChange= {this.onChange} value={this.state.input} placeholder="What to do today?"  />
                             <button type="submit">Add List</button>
                         </form>
                       </div>

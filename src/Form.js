@@ -51,7 +51,7 @@ class Form extends React.Component {
             borderLeft: "none",
             borderRight: "none",
             borderBottom: "4px solid #FFB200",
-            backgroundColor: "#F8F8F8",
+            backgroundColor: "#F1F1F1",
             fontSize: "14px",
         })
 

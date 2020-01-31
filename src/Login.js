@@ -85,20 +85,21 @@ class Login extends React.Component {
       })
 
         let textH3 = css ({
-          color: "white",
+          color: "rgba(21,71,60,1)",
           fontSize: "23px",
-          marginBottom: "0px",
+          marginBottom: "20px",
           width: "320px",
+          fontFamily: 'Montserrat',
           lineHeight: "20px",
         })
 
         let pText = css ({
           fontSize: "13px",
-          color: "#EEEEEE",
+          color: "#737373",
         })
 
         let pTextSpan = css ({
-          color: "#FFB200",
+          color: "orangered",
           fontWeight: "bold",
           ":hover": {
             color: "#FF8B00",
@@ -110,18 +111,23 @@ class Login extends React.Component {
                     <Helmet>
                           <title>Log In Account</title>
                     </Helmet>
-                    <h1>Welcome to doToDo</h1>
-                    <MdAssignmentTurnedIn color="#0a968b" className={icon}/>
-                    <h3 className={textH3}>Log in Account</h3>
-                    {errorMsg}
-                    <Form
-                         onSubmit = {this.onSubmit} 
-                         email = {this.state.email} onChangeEmail = {this.onChangeEmail}
-                         password = {this.state.password} onChangePass = {this.onChangePass}
-                         textContent = "Login"
-                    />
-                    <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
-                 </div>
+                        <div className="box-left">
+                            <h1>Welcome</h1>
+                            <MdAssignmentTurnedIn color="#0a968b" className={icon}/>
+                            <h1>doToDo</h1>
+                        </div>
+                        <div className="box-right">
+                            <h3 className={textH3}>Log in Account</h3>
+                            {errorMsg}
+                            <Form
+                                onSubmit = {this.onSubmit} 
+                                email = {this.state.email} onChangeEmail = {this.onChangeEmail}
+                                password = {this.state.password} onChangePass = {this.onChangePass}
+                                textContent = "Login"
+                            />
+                            <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
+                        </div>
+                </div>
         )
       }
     }
