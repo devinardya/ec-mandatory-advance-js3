@@ -22,7 +22,7 @@ class Form extends React.Component {
 
     onSubmit(e){
         e.preventDefault();
-        //this.props.onSubmit(true)
+        this.props.onSubmit()
     }
 
     render(){
@@ -34,10 +34,11 @@ class Form extends React.Component {
             height: "40px", 
             marginTop: "20px",
             border: "none",
-            backgroundColor: "#1FA70C",
+            backgroundColor: "#0a968b",
             ':hover': {
-              backgroundColor: "#0c6845",
+              backgroundColor: "#0c867b",
               cursor: "pointer",
+              color: "white"
             },
           })
 
@@ -49,16 +50,17 @@ class Form extends React.Component {
             borderTop: "none",
             borderLeft: "none",
             borderRight: "none",
-            borderBottom: "2px dotted cadetblue",
-            backgroundColor: "#F2F2F2"
+            borderBottom: "4px solid #FFB200",
+            backgroundColor: "#F8F8F8",
+            fontSize: "14px",
         })
 
 
         return ( <>
                     <form onSubmit = {this.onSubmit}>
-                        <input type="text" onChange={this.onChangeEmail} className={input} placeholder="email address" email = {this.props.value}/>
+                        <input type="email" onChange={this.onChangeEmail} className={input} placeholder="name@example.com" email = {this.props.value}/>
                         <input type="password" onChange={this.onChangePass} className={input} placeholder="password" password = {this.props.value}/>
-                        <button type="submit" className={rule}>Login</button>
+                        <button type="submit" className={rule}>{this.props.textContent}</button>
                     </form>
                  </>
         )

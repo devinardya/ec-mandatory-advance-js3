@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Poppins:700&display=swap');
+
 .App {
     text-align: center;
     display: flex;
@@ -14,8 +16,12 @@
     justify-content: center;
     align-items: center;
     padding: 30px;
-    border: 2px dotted #20b37b;
     border-radius: 10px;
+    background: rgb(21,71,60);
+    background: linear-gradient(0deg, rgba(21,71,60,1) 0%, rgba(3,203,192,1) 100%);
+    -webkit-box-shadow: -1px 0px 21px -2px rgba(0,0,0,0.46);
+    -moz-box-shadow: -1px 0px 21px -2px rgba(0,0,0,0.46);
+    box-shadow: -1px 0px 21px -2px rgba(0,0,0,0.46);
 }
 
 .register-box form, .login-box form {
@@ -30,9 +36,202 @@
 }
 
 .register-box h1, .login-box h1 {
-    color : #1FA70C;
+    color : #ffffff;
 }
 
+.err {
+    color: orange;
+    margin: 10px 0 -2px 0;
+
+}
+
+/* TODO COMPONENT */
+
+.todoBox {
+    width: 90%;
+    max-width: 1400px;
+    height: 100%;
+    min-width: 700px;
+    background-color: rgb(247, 247, 247);
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 8%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(21,71,60);
+    background: linear-gradient(-135deg, rgba(21,71,60,1) 0%, rgba(3,203,192,1) 100%);
+}
+
+.loginUser {
+    color: white;
+    margin-right: 10px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.header span {
+    color: white;
+}
+
+.logoutButton {
+    margin-right: 30px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.logoutButton:hover {
+    color: orange;
+    cursor: pointer;
+}
+
+.header-left h3 {
+    color: white;
+    font-size: 30px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -3px;
+    justify-self: flex-start;
+    margin: 0 0 0 30px;
+    width: 50%;
+}
+
+.header-right {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    height: 92%;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    padding-left: 30px;
+    color: cadetblue;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.content form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.content input {
+    margin-left: 30px;
+    width: calc(80% - 50px);
+    height: 30px;
+    padding-left: 20px;
+}
+
+.content-top {
+    background-color: rgb(247, 247, 247);
+    width: 90%;
+    z-index: 999999999999;
+}
+
+.content button {
+    height: 30px;
+    width: calc(20% - 50px);
+    margin-left: 10px;
+    border: none;
+    background-color: cadetblue;
+    color: white;
+    font-weight: bold;
+    margin-right: 30px;
+}
+
+.content button:hover {
+    cursor: pointer;
+}
+
+.todolist {
+    width: 80%;
+    height: 75%;
+    overflow-y: auto;
+}
+
+.content ul {
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+}
+
+.content li {
+    height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px dotted cadetblue;
+    width: 100%;
+    color: #737373;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.content li:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.liText {
+    width: 88%;
+}
+
+
+.deleteBtn {
+    width: calc(5% - 30px);
+    justify-self: flex-end;
+    margin-right: 30px;
+}
+
+.deleteBtn button {
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    margin: 0;
+}
+
+.deleteBtn:hover {
+    cursor: pointer;
+
+}
+
+.list-radioBtn {
+    margin-right: 15px;
+    position: relative;
+    top: 2px;
+    width: calc(5% - 15px);
+}
 
 
 

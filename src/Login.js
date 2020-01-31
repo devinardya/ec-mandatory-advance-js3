@@ -44,7 +44,7 @@ class Login extends React.Component {
         this.setState({password: value});
       }
     
-      onSubmit(e) {
+      onSubmit() {
         //e.preventDefault();
         let authData = {
           email: this.state.email,
@@ -72,34 +72,36 @@ class Login extends React.Component {
 
         let errorMsg = null;
         if (this.state.error) {
-          errorMsg = 'Invalid login values';
+          errorMsg = <p className="err">Invalid login values</p>;
         }
 
         let icon = css({
           width: "80px",
           height: "80px",
-          backgroundColor: "#1FA70C",
+          backgroundColor: "white",
           borderRadius: "50%",
           padding: "20px",
           marginBottom: "30px",
       })
 
         let textH3 = css ({
-          color: "#1FA70C",
-          fontSize: "15px",
+          color: "white",
+          fontSize: "23px",
           marginBottom: "0px",
+          width: "320px",
+          lineHeight: "20px",
         })
 
         let pText = css ({
           fontSize: "13px",
-          color: "#737373",
+          color: "#EEEEEE",
         })
 
         let pTextSpan = css ({
-          color: "green",
+          color: "#FFB200",
           fontWeight: "bold",
           ":hover": {
-            color: "#0c6845",
+            color: "#FF8B00",
           }
         })
 
@@ -108,14 +110,15 @@ class Login extends React.Component {
                     <Helmet>
                           <title>Log In Account</title>
                     </Helmet>
+                    <h1>Welcome to doToDo</h1>
+                    <MdAssignmentTurnedIn color="#0a968b" className={icon}/>
+                    <h3 className={textH3}>Log in Account</h3>
                     {errorMsg}
-                    <h1>DoToDo App</h1>
-                    <MdAssignmentTurnedIn color="white" className={icon}/>
-                    <h3 className={textH3}>Please log in using your email and password!</h3>
                     <Form
                          onSubmit = {this.onSubmit} 
                          email = {this.state.email} onChangeEmail = {this.onChangeEmail}
                          password = {this.state.password} onChangePass = {this.onChangePass}
+                         textContent = "Login"
                     />
                     <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
                  </div>
