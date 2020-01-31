@@ -20,8 +20,10 @@ class Todo extends React.Component {
           input: "",
           data: [],
           radioBtn: false,
+          id: "",
         };
 
+        this.source = undefined;
         this.logout = this.logout.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -49,11 +51,16 @@ class Todo extends React.Component {
       }
 
       onGetData(){
+
+        let CancelToken = axios.CancelToken;
+        this.source = CancelToken.source();
       
         axios.get(url, {
             headers: {
               Authorization: `Bearer ${this.state.token}`
-            }
+            },
+          },{
+            cancelToken: this.source.token
           })
           .then(response => {
             //this.setState({profile: response.data.profile});
@@ -111,14 +118,15 @@ class Todo extends React.Component {
        })
       }
 
-   
-
-      radioBtnChange(){
+      radioBtnChange(id){
           this.setState({radioBtn: this.state.radioBtn === false ? true : false});
+          this.setState({id : id})
       }
 
       componentWillUnmount(){
           this.subscribe.unsubscribe();
+
+          this.source.cancel('Operation canceled by the user.'); 
 
       }
 
@@ -138,25 +146,30 @@ class Todo extends React.Component {
             //console.log("not undefined");
             datas.push(this.state.data)
             //console.log(datas[0]);
-            let button;
-            if(this.state.radioBtn){
-              button = <MdRadioButtonChecked />
-          } else {
-              button = <MdRadioButtonUnchecked />
-          }
+            
 
             printData = datas[0].map(data => {
+              let button;
               
+              if(this.state.radioBtn){
+              
+                      button = <MdRadioButtonChecked />
+                   
+                } else {
+         
+                      button = <MdRadioButtonUnchecked />
+                  
+                }
              
               return (<li key= {data.id}>
-                          <span className="list-radioBtn" onClick={() => this.radioBtnChange()}>
+                          <span className="list-radioBtn" onClick={() => this.radioBtnChange(data.id)}>
                               {button}
                           </span>
                           <span className ="liText">
                                {data.content} 
                           </span>
                           <span className="deleteBtn">
-                              <button onClick = {() => this.onDelete(data.id)}><MdClose size="20px" style={{color: "red"}}/></button>
+                              <button onClick = {() => this.onDelete(data.id)}><MdClose size="20px" style={{color: "red", position:"relative", right:"40px"}}/></button>
                           </span>
                       </li>
                       )
@@ -182,7 +195,7 @@ class Todo extends React.Component {
                         <h2>YOUR TO DO LIST</h2>
                         <form onSubmit = {this.onSubmit}>
                             <input type="text" onChange= {this.onChange} value={this.state.input} placeholder="What to do today?"  />
-                            <button type="submit">Add List</button>
+                            <button className="addButton" type="submit">Add List</button>
                         </form>
                       </div>
                       <div className="todolist">

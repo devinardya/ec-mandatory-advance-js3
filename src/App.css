@@ -79,9 +79,7 @@
 
 .todoBox {
     width: 90%;
-    max-width: 1400px;
     height: 100%;
-    min-width: 700px;
     background-color: rgb(247, 247, 247);
     display: flex;
     flex-flow: column wrap;
@@ -184,7 +182,7 @@
     z-index: 999999999999;
 }
 
-.content button {
+.addButton {
     height: 30px;
     width: calc(20% - 50px);
     margin-left: 10px;
@@ -195,8 +193,9 @@
     margin-right: 30px;
 }
 
-.content button:hover {
+.addButton:hover {
     cursor: pointer;
+    background-color: rgb(20, 102, 105);
 }
 
 .todolist {
@@ -220,7 +219,7 @@
     margin-bottom: 20px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
     border-bottom: 1px dotted cadetblue;
     width: 100%;
@@ -230,18 +229,18 @@
 }
 
 .content li:hover {
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(255, 232, 198);
 }
 
 .liText {
-    width: 88%;
+    width: 85%;
 }
 
 
 .deleteBtn {
     width: calc(5% - 30px);
     justify-self: flex-end;
-    margin-right: 30px;
+    margin-right: 0px;
 }
 
 .deleteBtn button {
@@ -251,16 +250,16 @@
     margin: 0;
 }
 
-.deleteBtn:hover {
+.deleteBtn button:hover {
     cursor: pointer;
-    background-color: rgb(228, 228, 228);
 }
 
 .list-radioBtn {
-    margin-right: 15px;
+    margin-right: 25px;
     position: relative;
     top: 2px;
-    width: calc(5% - 15px);
+    width: calc(5% - 50px);
+    margin-left: 25px;
 }
 
 
