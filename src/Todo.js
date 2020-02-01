@@ -3,10 +3,11 @@ import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { MdRadioButtonUnchecked } from "react-icons/md";
-import { MdRadioButtonChecked } from "react-icons/md";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { MdCheckBox } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import jwt from 'jsonwebtoken';
+
 
 let url = 'http://3.120.96.16:3002/todos';
 
@@ -19,8 +20,8 @@ class Todo extends React.Component {
           token: token$.value,
           input: "",
           data: [],
-          radioBtn: false,
-          id: "",
+          //radioBtn: [],
+          idStat: false,
         };
 
         this.source = undefined;
@@ -33,6 +34,7 @@ class Todo extends React.Component {
       }
 
       componentDidMount() {
+        console.log("does it mount")
 
         this.subscribe = token$.subscribe(token => {
           this.setState({token});
@@ -44,8 +46,6 @@ class Todo extends React.Component {
 
         if (this.state.token){
             this.onGetData();
-        }else {
-          this.setState({token: null})
         }
         
       }
@@ -64,12 +64,28 @@ class Todo extends React.Component {
           })
           .then(response => {
             //this.setState({profile: response.data.profile});
-            console.log(response.data.todos)
-            this.setState({data: response.data.todos})
+            //
+            
+            console.log(response.data.todos);
+            this.setState({data: response.data.todos});
+            // console.log(this.state.data.length);
+            /* let radioBool = [];
+            for (var i = 0; i < this.state.data.length; i++){
+              radioBool.push(false);
+            }
+            this.setState({radioBtn: radioBool});  */
+            
+          })
+          .then ( () => {
+            let datas = this.state.data;
+            datas.map(data => {
+              return data.buttonState = false;
+            })
+            this.setState({data: datas})
           })
           .catch(e => {
             console.error(e);
-            
+            updateToken(null);
           });
       }
 
@@ -118,23 +134,45 @@ class Todo extends React.Component {
        })
       }
 
-      radioBtnChange(id){
-          this.setState({radioBtn: this.state.radioBtn === false ? true : false});
-          this.setState({id : id})
+      radioBtnChange(index){
+          if (index){
+            const buttonIndex = this.state.data.findIndex (x => x.id === index);
+          // console.log(buttonIndex)
+            const data = [...this.state.data];
+          
+          //console.log("the curent data", data)
+          
+          data[buttonIndex] = {
+              content: data[buttonIndex].content,
+              id : data[buttonIndex].id,
+              buttonState : data[buttonIndex].buttonState === false ? true : false,
+          }
+
+          this.setState({data})
+        }
+
       }
 
       componentWillUnmount(){
           this.subscribe.unsubscribe();
 
-          this.source.cancel('Operation canceled by the user.'); 
+          //this.source.cancel('Operation canceled by the user.'); 
 
       }
+
+ /*      shouldComponentUpdate(nextState) {
+        if (this.state.buttonState !== undefined){
+            return (this.state.data.buttonState !== nextState.data.buttonState);
+        } 
+      } */
 
     render(){
 
         if (!this.state.token) {
             return <Redirect to="/login" />;
           }
+        
+
    
         //console.log(this.state.data)
         let datas = [];
@@ -145,22 +183,18 @@ class Todo extends React.Component {
 
             //console.log("not undefined");
             datas.push(this.state.data)
-            //console.log(datas[0]);
             
+           
 
-            printData = datas[0].map(data => {
+            printData = datas[0].map((data) => {
               let button;
-              
-              if(this.state.radioBtn){
-              
-                      button = <MdRadioButtonChecked />
-                   
-                } else {
-         
-                      button = <MdRadioButtonUnchecked />
-                  
-                }
-             
+              console.log(data.buttonState)
+              if (data.buttonState){
+                button = <MdCheckBox size="20px"  style={{color: "green"}}/>
+              } else {
+                button = <MdCheckBoxOutlineBlank size="20px"/>
+              }
+              //console.log(data.buttonState);
               return (<li key= {data.id}>
                           <span className="list-radioBtn" onClick={() => this.radioBtnChange(data.id)}>
                               {button}
@@ -173,9 +207,11 @@ class Todo extends React.Component {
                           </span>
                       </li>
                       )
+            
             })
-        
         }
+
+
         return <div className="todoBox">
                   <Helmet>
                       <title>To Do List</title>
@@ -205,7 +241,9 @@ class Todo extends React.Component {
                       </div>
                   </div>
              </div>
-    }
+    
+  }
 }
+    
 
 export default Todo;
