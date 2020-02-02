@@ -10,6 +10,10 @@ class Form extends React.Component {
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePass = this.onChangePass.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onRemovePlaceholderTextUser = this.onRemovePlaceholderTextUser.bind(this);
+        this.onShowPlacehoderTextUser = this.onShowPlacehoderTextUser.bind(this);
+        this.onRemovePlaceholderTextPass = this.onRemovePlaceholderTextPass.bind(this);
+        this.onShowPlacehoderTextPass = this.onShowPlacehoderTextPass.bind(this);
     }
 
     onChangeEmail(e) {
@@ -22,8 +26,24 @@ class Form extends React.Component {
 
     onSubmit(e){
         e.preventDefault();
-        this.props.onSubmit()
+        this.props.onSubmit();
     }
+
+    onRemovePlaceholderTextUser(){
+        this.props.onRemovePlaceholderTextUser();
+    }
+
+      onShowPlacehoderTextUser(){
+        this.props.onShowPlacehoderTextUser();
+    }
+
+    onRemovePlaceholderTextPass(){
+      this.props.onRemovePlaceholderTextPass();
+  }
+
+    onShowPlacehoderTextPass(){
+      this.props.onShowPlacehoderTextPass();
+  }
 
     render(){
         let rule = css({
@@ -42,7 +62,8 @@ class Form extends React.Component {
             },
           })
 
-        let input = css({
+        let input;
+        input = css({
             width: "80%",
             height: "40px",
             paddingLeft: "10px",
@@ -53,13 +74,71 @@ class Form extends React.Component {
             borderBottom: "4px solid #FFB200",
             backgroundColor: "#F1F1F1",
             fontSize: "14px",
+            "::placeholder": {
+                color: "rgb(94, 94, 94)"
+              }
         })
 
 
+        //console.log(this.props.textPlaceholderUser )
+
+        //console.log(this.props.error)
+            if(this.props.error400){
+              input = css({
+                width: "80%",
+                height: "40px",
+                paddingLeft: "10px",
+                margin: "10px 0",
+                borderTop: "none",
+                borderLeft: "none",
+                borderRight: "none",
+                borderBottom: "4px solid #FFB200",
+                backgroundColor: "#F1F1F1",
+                fontSize: "14px",
+                border: "2px solid red",
+                "::placeholder": {
+                  color: "red",
+                }
+              })
+          } else if (this.props.error401){
+            input = css({
+                width: "80%",
+                height: "40px",
+                paddingLeft: "10px",
+                margin: "10px 0",
+                borderTop: "none",
+                borderLeft: "none",
+                borderRight: "none",
+                borderBottom: "4px solid #FFB200",
+                backgroundColor: "#F1F1F1",
+                fontSize: "14px",
+                border: "2px solid red",
+                "::placeholder": {
+                  color: "red",
+                }
+              })
+          }
+       
+          
+
         return ( <>
                     <form onSubmit = {this.onSubmit}>
-                        <input type="email" onChange={this.onChangeEmail} className={input} placeholder="name@example.com" email = {this.props.value}/>
-                        <input type="password" onChange={this.onChangePass} className={input} placeholder="password" password = {this.props.value}/>
+                        <input type="email" 
+                            onChange={this.onChangeEmail} 
+                            className={input} 
+                            placeholder= {this.props.placeholderUser} 
+                            email = {this.props.value} 
+                            onFocus={this.props.onFocusText} 
+                            onBlur={this.props.onBlurText}
+                            value ={this.props.valueUser}/>
+                        <input type="password" 
+                            onChange={this.onChangePass} 
+                            className={input} 
+                            placeholder= {this.props.placeholderPass} 
+                            password = {this.props.value} 
+                            onFocus={this.props.onFocusPass} 
+                            onBlur={this.props.onBlurPass}
+                            value = {this.props.valuePass}/>
                         <button type="submit" className={rule}>{this.props.textContent}</button>
                     </form>
                  </>

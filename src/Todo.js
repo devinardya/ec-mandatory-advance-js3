@@ -34,6 +34,7 @@ class Todo extends React.Component {
         this.onDelete = this.onDelete.bind(this);
         this.radioBtnChange = this.radioBtnChange.bind(this);
         this.onRemovePlaceholderText = this.onRemovePlaceholderText.bind(this);
+        this.onShowPlacehoderText = this.onShowPlacehoderText.bind(this);
       }
 
       componentDidMount() {
@@ -107,6 +108,7 @@ class Todo extends React.Component {
         .then( response => {
           console.log(response)
           //this.onGetData();
+          // save the input locally to avoid the need to fetch new data from the server, hence making it lighter to load for user
           let copyData = [...this.state.data];
           let newData = {
             content: response.data.todo.content,
@@ -114,7 +116,7 @@ class Todo extends React.Component {
             buttonState: false,
           }
 
-          this.setState({data: [...copyData, newData]})
+          this.setState({data: [...copyData, newData]}) 
           this.setState({inputError: false})
           this.setState({textPlaceholder: true})
        })
@@ -172,6 +174,10 @@ class Todo extends React.Component {
 
       onRemovePlaceholderText(){
           this.setState({textPlaceholder : false})
+      }
+
+      onShowPlacehoderText(){
+        this.setState({textPlaceholder : true})
       }
 
     render(){
@@ -233,27 +239,27 @@ class Todo extends React.Component {
             padding: "2px",
           })
         } else {
-          if(this.state.inputError){
-            inputErrorMessage = "Error! Invalid input!";
+            if(this.state.inputError){
+              inputErrorMessage = "Error! Invalid input!";
 
-            placeholder = css({
-              border: "2px solid red",
-              padding: "2px",
-              "::placeholder": {
-                color: "red",
-                fontWeight: "bold",
-              }
-            })
-        } else {
-            inputErrorMessage = "What to do today?";
-            placeholder = css({
-              border: "px solid #dddddd",
-              padding: "2px",
-              "::placeholder": {
-                color: "black"
-              }
-            })
-        }
+              placeholder = css({
+                border: "2px solid red",
+                padding: "2px",
+                "::placeholder": {
+                  color: "red",
+                  fontWeight: "bold",
+                }
+              })
+          } else {
+              inputErrorMessage = "What to do today?";
+              placeholder = css({
+                border: "px solid #dddddd",
+                padding: "2px",
+                "::placeholder": {
+                  color: "rgb(94, 94, 94)"
+                }
+              })
+          }
         }
 
 
@@ -275,7 +281,7 @@ class Todo extends React.Component {
                       <div className="content-top">
                         <h2>YOUR TO DO LIST</h2>
                         <form onSubmit = {this.onSubmit}>
-                            <input className={placeholder} type="text" onChange= {this.onChange} value={this.state.input} placeholder= {inputErrorMessage} onClick={this.onRemovePlaceholderText}/>
+                            <input className={placeholder} type="text" onChange= {this.onChange} value={this.state.input} placeholder= {inputErrorMessage} onFocus={this.onRemovePlaceholderText} onBlur={this.onShowPlacehoderText}/>
                             <button className="addButton" type="submit">Add List</button>
                         </form>
                       </div>

@@ -17,13 +17,23 @@ class Login extends React.Component {
         this.state = {
           email: '',
           password: '',
-          error: false,
+          error401: false,
+          error400: false,
           token: token$.value,
+          textPlaceholderUser: true,
+          textPlaceholderPass: true,
+          valueUser: "",
+          valuePass:"",
+          errorMsg: "",
         };
     
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePass = this.onChangePass.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onRemovePlaceholderTextUser = this.onRemovePlaceholderTextUser.bind(this);
+        this.onShowPlacehoderTextUser = this.onShowPlacehoderTextUser.bind(this);
+        this.onRemovePlaceholderTextPass = this.onRemovePlaceholderTextPass.bind(this);
+        this.onShowPlacehoderTextPass = this.onShowPlacehoderTextPass.bind(this);
       }
     
       componentDidMount() {
@@ -37,11 +47,11 @@ class Login extends React.Component {
       }
     
       onChangeEmail(value) {
-        this.setState({email: value});
+        this.setState({email: value, valueUser: value});
       }
     
       onChangePass(value) {
-        this.setState({password: value});
+        this.setState({password: value, valuePass: value});
       }
     
       onSubmit() {
@@ -59,21 +69,44 @@ class Login extends React.Component {
             updateToken(response.data.token);
           })
           .catch(err => {
-            this.setState({error: true});
-            console.error(err);
+            //this.setState({error: true});
+            console.log(err.response.data);
+            if (err.response.data.message === "Validation error"){
+              this.setState({error400: true, 
+                             error401: false, 
+                             errorMsg: err.response.data.details[0].message})
+             
+            } else if (err.response.data.message === "Email or password incorrect"){
+              console.log("error 401")
+              this.setState({error401: true, 
+                             error400: false,
+                             errorMsg: err.response.data.message})
+              
+            }
           });
       }
+
+      onRemovePlaceholderTextUser(){
+        this.setState({textPlaceholderUser: false})
+    }
+
+      onShowPlacehoderTextUser(){
+        this.setState({textPlaceholderUser: true})
+    }
+
+      onRemovePlaceholderTextPass(){
+        this.setState({textPlaceholderPass: false})
+    }
+
+      onShowPlacehoderTextPass(){
+        this.setState({textPlaceholderPass: true})
+    }
     
       render() {
 
         if (this.state.token) {
             return <Redirect to="/" />;
         } 
-
-        let errorMsg = null;
-        if (this.state.error) {
-          errorMsg = <p className="err">Invalid login values</p>;
-        }
 
         let icon = css({
           width: "80px",
@@ -106,6 +139,49 @@ class Login extends React.Component {
           }
         })
 
+        let errMsg = css ({
+          color: "red",
+          margin: 0,
+          fontSize: "12px",
+          height: "12px",
+          fontWeight: "bold",
+        })
+
+        let inputErrorUser;
+        let inputErrorPass;
+        let errorMsg = <p className = {errMsg}> </p>;
+        if (this.state.error400) {
+          errorMsg = <p className = {errMsg}>{this.state.errorMsg}</p>;
+        } else if (this.state.error401){
+          errorMsg = <p className = {errMsg}>{this.state.errorMsg}</p>
+        }
+
+
+        //console.log(this.state.valueUser)
+
+        if(!this.state.textPlaceholderUser){
+            inputErrorUser = null;
+            inputErrorPass = "password";
+            console.log('roar')
+          } else if (!this.state.textPlaceholderPass){
+            inputErrorUser = "name@email.com";
+            inputErrorPass = null;
+            //console.log('hejhej')
+          }else {
+            if(this.state.error400){
+                inputErrorUser = null;
+                inputErrorPass = null;
+            } else if (this.state.error401){
+                //console.log('401')
+                inputErrorUser = this.state.valueUser;
+                inputErrorPass = this.state.valuePass;
+            }else {
+              inputErrorUser = "name@email.com";
+              inputErrorPass = "password";
+            }
+          
+          }
+
 
         return (<div className ="login-box">
                     <Helmet>
@@ -118,11 +194,13 @@ class Login extends React.Component {
                         </div>
                         <div className="box-right">
                             <h3 className={textH3}>Log in Account</h3>
-                            {errorMsg}
+                           {errorMsg}
                             <Form
                                 onSubmit = {this.onSubmit} 
-                                email = {this.state.email} onChangeEmail = {this.onChangeEmail}
-                                password = {this.state.password} onChangePass = {this.onChangePass}
+                                error400 = {this.state.error400}
+                                error401 = {this.state.error401}
+                                email = {this.state.email} onChangeEmail = {this.onChangeEmail} valueUser = {this.state.valueUser} placeholderUser = {inputErrorUser} onFocusText={this.onRemovePlaceholderTextUser} onBlurText={this.onShowPlacehoderTextUser}
+                                password = {this.state.password} onChangePass = {this.onChangePass} valuePass =  {this.state.valuePass} placeholderPass = {inputErrorPass} onFocusPass={this.onRemovePlaceholderTextPass} onBlurPass={this.onShowPlacehoderTextPass}
                                 textContent = "Login"
                             />
                             <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
