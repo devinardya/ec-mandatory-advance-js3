@@ -3,9 +3,10 @@ import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { MdCheckBoxOutlineBlank } from "react-icons/md";
-import { MdCheckBox } from "react-icons/md";
+import { MdRadioButtonUnchecked } from "react-icons/md";
+import { MdCheckCircle } from "react-icons/md";
 import { MdClose } from "react-icons/md";
+import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 
 
@@ -20,8 +21,9 @@ class Todo extends React.Component {
           token: token$.value,
           input: "",
           data: [],
-          //radioBtn: [],
+          inputError: false,
           idStat: false,
+          textPlaceholder: true,
         };
 
         this.source = undefined;
@@ -31,6 +33,7 @@ class Todo extends React.Component {
         this.onGetData = this.onGetData.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.radioBtnChange = this.radioBtnChange.bind(this);
+        this.onRemovePlaceholderText = this.onRemovePlaceholderText.bind(this);
       }
 
       componentDidMount() {
@@ -62,18 +65,9 @@ class Todo extends React.Component {
           },{
             cancelToken: this.source.token
           })
-          .then(response => {
-            //this.setState({profile: response.data.profile});
-            //
-            
+          .then(response => {   
             console.log(response.data.todos);
-            this.setState({data: response.data.todos});
-            // console.log(this.state.data.length);
-            /* let radioBool = [];
-            for (var i = 0; i < this.state.data.length; i++){
-              radioBool.push(false);
-            }
-            this.setState({radioBtn: radioBool});  */
+            this.setState({data: response.data.todos});    
             
           })
           .then ( () => {
@@ -112,12 +106,22 @@ class Todo extends React.Component {
         })
         .then( response => {
           console.log(response)
-          this.onGetData();
-          /* let oldData = [...this.state.data];
-          this.setState({data: [...oldData, userInput]}) */
+          //this.onGetData();
+          let copyData = [...this.state.data];
+          let newData = {
+            content: response.data.todo.content,
+            id: response.data.todo.content,
+            buttonState: false,
+          }
+
+          this.setState({data: [...copyData, newData]})
+          this.setState({inputError: false})
+          this.setState({textPlaceholder: true})
        })
        .catch ( err => {
          console.log(err);
+         this.setState({inputError: true})
+         this.setState({textPlaceholder: true})
        })
        
       }
@@ -160,55 +164,96 @@ class Todo extends React.Component {
 
       }
 
- /*      shouldComponentUpdate(nextState) {
-        if (this.state.buttonState !== undefined){
-            return (this.state.data.buttonState !== nextState.data.buttonState);
-        } 
-      } */
+      shouldComponentUpdate(nextState, prevState){
+          if(this.state.data.buttonState !== undefined){
+            return this.state.data.buttonState !== prevState.data.buttonState
+          } return true
+      } 
+
+      onRemovePlaceholderText(){
+          this.setState({textPlaceholder : false})
+      }
 
     render(){
 
         if (!this.state.token) {
             return <Redirect to="/login" />;
           }
-        
 
-   
-        //console.log(this.state.data)
         let datas = [];
         let printData;
-        //console.log(this.state.data[0]);
+
+        let icon = css({
+          color: "rgba(180, 180, 180, 0.5)", 
+          position:"relative", 
+          right:"40px",
+          ":hover":{
+            color: "red",
+          }
+      })
+
+
         
         if (this.state.data){
 
             //console.log("not undefined");
             datas.push(this.state.data)
-            
-           
 
             printData = datas[0].map((data) => {
               let button;
-              console.log(data.buttonState)
+              //console.log(data.id)
               if (data.buttonState){
-                button = <MdCheckBox size="20px"  style={{color: "green"}}/>
+                button = <MdCheckCircle size="20px"  style={{color: "green"}}/>
               } else {
-                button = <MdCheckBoxOutlineBlank size="20px"/>
+                button = <MdRadioButtonUnchecked size="20px"/>
               }
               //console.log(data.buttonState);
               return (<li key= {data.id}>
-                          <span className="list-radioBtn" onClick={() => this.radioBtnChange(data.id)}>
-                              {button}
+                          <span className="liText" onClick={() => this.radioBtnChange(data.id)}>
+                              <span>{button}</span>
+                              <span>{data.content}</span>
                           </span>
-                          <span className ="liText">
-                               {data.content} 
-                          </span>
+                          
                           <span className="deleteBtn">
-                              <button onClick = {() => this.onDelete(data.id)}><MdClose size="20px" style={{color: "red", position:"relative", right:"40px"}}/></button>
+                              <button className={icon} onClick = {() => this.onDelete(data.id)}><MdClose size="25px" /></button>
                           </span>
                       </li>
                       )
             
             })
+        }
+
+        let inputErrorMessage;
+        let placeholder;
+
+
+        if(!this.state.textPlaceholder){
+          inputErrorMessage = null;
+          placeholder = css({
+            padding: "2px",
+          })
+        } else {
+          if(this.state.inputError){
+            inputErrorMessage = "Error! Invalid input!";
+
+            placeholder = css({
+              border: "2px solid red",
+              padding: "2px",
+              "::placeholder": {
+                color: "red",
+                fontWeight: "bold",
+              }
+            })
+        } else {
+            inputErrorMessage = "What to do today?";
+            placeholder = css({
+              border: "px solid #dddddd",
+              padding: "2px",
+              "::placeholder": {
+                color: "black"
+              }
+            })
+        }
         }
 
 
@@ -230,7 +275,7 @@ class Todo extends React.Component {
                       <div className="content-top">
                         <h2>YOUR TO DO LIST</h2>
                         <form onSubmit = {this.onSubmit}>
-                            <input type="text" onChange= {this.onChange} value={this.state.input} placeholder="What to do today?"  />
+                            <input className={placeholder} type="text" onChange= {this.onChange} value={this.state.input} placeholder= {inputErrorMessage} onClick={this.onRemovePlaceholderText}/>
                             <button className="addButton" type="submit">Add List</button>
                         </form>
                       </div>

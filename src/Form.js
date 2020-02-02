@@ -30,9 +30,9 @@ class Form extends React.Component {
             color: 'white',
             fontWeight: "bold",
             fontSize: "13px",
-            width: "311px",
+            width: "84%",
             height: "40px", 
-            marginTop: "20px",
+            margin: "20px 0",
             border: "none",
             backgroundColor: "#0a968b",
             ':hover': {
@@ -43,7 +43,7 @@ class Form extends React.Component {
           })
 
         let input = css({
-            width: "300px",
+            width: "80%",
             height: "40px",
             paddingLeft: "10px",
             margin: "10px 0",

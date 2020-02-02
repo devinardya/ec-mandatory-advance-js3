@@ -93,12 +93,7 @@ class Register extends React.Component {
                     <Helmet>
                           <title>Create Account</title>
                     </Helmet>
-                    <div className="box-left">
-                           <h1>Welcome</h1>
-                            <MdAssignmentTurnedIn color="#0a968b" className={icon}/>
-                            <h1>doToDo</h1>
-                        </div>
-                        <div className="box-right">
+                    
                             <h3 className={textH3}>Create Account</h3>
                             {errorMsg}
                             <Form
@@ -108,7 +103,7 @@ class Register extends React.Component {
                                 textContent = "Create Account"
                             />
                             <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>
-                        </div>
+                       
                 </div>
                 )
     }
