@@ -169,8 +169,8 @@ class Login extends React.Component {
             //console.log('hejhej')
           }else {
             if(this.state.error400){
-                inputErrorUser = null;
-                inputErrorPass = null;
+              inputErrorUser = "name@email.com";
+              inputErrorPass = "password";
             } else if (this.state.error401){
                 //console.log('401')
                 inputErrorUser = this.state.valueUser;
