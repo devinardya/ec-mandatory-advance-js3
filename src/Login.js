@@ -8,7 +8,7 @@ import { MdAssignmentTurnedIn } from "react-icons/md";
 import jwt from "jsonwebtoken";
 import { css } from "glamor";
 import Form from './Form';
-
+import Header from './Header';
 
 
 class Login extends React.Component {
@@ -190,33 +190,31 @@ class Login extends React.Component {
                     <Helmet>
                           <title>Log In Account</title>
                     </Helmet>
-                        <div className="box-left">
-                            <h1>Welcome</h1>
-                            <MdAssignmentTurnedIn color="#1c9bfa" className={icon}/>
-                            <h1>doToDo</h1>
-                        </div>
-                        <div className="box-right">
-                            <h3 className={textH3}>Log in</h3>
-                           {errorMsg}
-                            <Form
-                                onSubmit = {this.onSubmit} 
-                                error400 = {this.state.error400}
-                                error401 = {this.state.error401}
-                                email = {this.state.email} 
-                                onChangeEmail = {this.onChangeEmail} 
-                                valueUser = {this.state.valueUser} 
-                                placeholderUser = {inputErrorUser} 
-                                onFocusText={this.onRemovePlaceholderTextUser} 
-                                onBlurText={this.onShowPlacehoderTextUser}
-                                password = {this.state.password} 
-                                onChangePass = {this.onChangePass} 
-                                valuePass =  {this.state.valuePass} 
-                                placeholderPass = {inputErrorPass} 
-                                onFocusPass={this.onRemovePlaceholderTextPass} 
-                                onBlurPass={this.onShowPlacehoderTextPass}
-                                textContent = "Login"
-                            />
-                            <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
+                        <Header valuePage = "welcome" testItem = "welcome"/>
+                        <div className="welcome-container">
+                            <div className="box-right">
+                                <h3 className={textH3}>Log in</h3>
+                              {errorMsg}
+                                <Form
+                                    onSubmit = {this.onSubmit} 
+                                    error400 = {this.state.error400}
+                                    error401 = {this.state.error401}
+                                    email = {this.state.email} 
+                                    onChangeEmail = {this.onChangeEmail} 
+                                    valueUser = {this.state.valueUser} 
+                                    placeholderUser = {inputErrorUser} 
+                                    onFocusText={this.onRemovePlaceholderTextUser} 
+                                    onBlurText={this.onShowPlacehoderTextUser}
+                                    password = {this.state.password} 
+                                    onChangePass = {this.onChangePass} 
+                                    valuePass =  {this.state.valuePass} 
+                                    placeholderPass = {inputErrorPass} 
+                                    onFocusPass={this.onRemovePlaceholderTextPass} 
+                                    onBlurPass={this.onShowPlacehoderTextPass}
+                                    textContent = "Login"
+                                />
+                                <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
+                            </div>
                         </div>
                 </div>
         )

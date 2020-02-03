@@ -5,6 +5,7 @@ import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
 import { css } from "glamor";
 import Form from './Form';
+import Header from './Header';
 
 class Register extends React.Component {
     constructor(props){
@@ -149,19 +150,20 @@ class Register extends React.Component {
                     <Helmet>
                           <title>Create Account</title>
                     </Helmet>
-                    
-                            <h3 className={textH3}>Create Account</h3>
-                            {errorMsg}
-                            <Form
-                               onSubmit = {this.onSubmit} 
-                               error400 = {this.state.error400}
-                               error401 = {this.state.error401}
-                               email = {this.state.email} onChangeEmail = {this.onChangeEmail} valueUser = {this.state.valueUser} placeholderUser = {inputErrorUser} onFocusText={this.onRemovePlaceholderTextUser} onBlurText={this.onShowPlacehoderTextUser}
-                               password = {this.state.password} onChangePass = {this.onChangePass} valuePass =  {this.state.valuePass} placeholderPass = {inputErrorPass} onFocusPass={this.onRemovePlaceholderTextPass} onBlurPass={this.onShowPlacehoderTextPass}
-                               textContent = "Create Account"
-                            />
-                            <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>
-                       
+                    <Header valuePage = "welcome" testItem = "welcome"/>
+                    <div className="welcome-container">
+                        <h3 className={textH3}>Create Account</h3>
+                        {errorMsg}
+                        <Form
+                            onSubmit = {this.onSubmit} 
+                            error400 = {this.state.error400}
+                            error401 = {this.state.error401}
+                            email = {this.state.email} onChangeEmail = {this.onChangeEmail} valueUser = {this.state.valueUser} placeholderUser = {inputErrorUser} onFocusText={this.onRemovePlaceholderTextUser} onBlurText={this.onShowPlacehoderTextUser}
+                            password = {this.state.password} onChangePass = {this.onChangePass} valuePass =  {this.state.valuePass} placeholderPass = {inputErrorPass} onFocusPass={this.onRemovePlaceholderTextPass} onBlurPass={this.onShowPlacehoderTextPass}
+                            textContent = "Create Account"
+                        />
+                        <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>
+                    </div>   
                 </div>
                 )
     }

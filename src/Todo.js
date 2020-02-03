@@ -8,6 +8,7 @@ import { MdCheckCircle } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
+import Header from './Header';
 
 
 let url = 'http://3.120.96.16:3002/todos';
@@ -208,7 +209,7 @@ class Todo extends React.Component {
         
       // if the token is not valid or no longer valid, then the page should be automatically redirect to the login page
         if (!this.state.token) {
-            return <Redirect to="/login" />;
+            return <Redirect to="/welcome" />;
           }
 
         let datas = [];
@@ -320,7 +321,7 @@ class Todo extends React.Component {
           }
         }
 
-        if (this.state.input.length > 100){
+        if (this.state.input.length > 100 || this.state.input.length === 0){
 
             counter = css ({
               fontSize: "12px",
@@ -337,16 +338,10 @@ class Todo extends React.Component {
                   <Helmet>
                       <title>To Do List</title>
                   </Helmet>
-                  <div className="header">
-                      <div className="header-left">
-                          <h3>doToDo</h3>
-                      </div>
-                      <div className="header-right">
-                          <p className="loginUser">{this.state.user}</p>
-                          <span>|</span>
-                          <button onClick={this.logout} className="logoutButton">Log out</button>
-                      </div>
-                  </div>
+                  <Header user = {this.state.user}
+                          logout = {this.logout}
+                          testItem = "todo"
+                  />
                   <div className="container">
                       <div className="info-box">
                           <div className="info-area">

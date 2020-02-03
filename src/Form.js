@@ -64,11 +64,6 @@ class Form extends React.Component {
 
         let input;
       
-
-
-        //console.log(this.props.textPlaceholderUser )
-
-        //console.log(this.props.error)
             if(this.props.error400){
               input = css({
                 width: "80%",
