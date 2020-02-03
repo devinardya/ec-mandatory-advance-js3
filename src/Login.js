@@ -53,6 +53,8 @@ class Login extends React.Component {
       onChangePass(value) {
         this.setState({password: value, valuePass: value});
       }
+
+      // submitting user data to server and in return getting a new login token to be save in localStorage
     
       onSubmit() {
         //e.preventDefault();
@@ -118,12 +120,13 @@ class Login extends React.Component {
       })
 
         let textH3 = css ({
-          color: "rgba(21,71,60,1)",
-          fontSize: "23px",
-          marginBottom: "20px",
+          color: "#196ab1",
+          fontSize: "35px",
+          marginBottom: "30px",
           width: "320px",
           fontFamily: 'Montserrat',
           lineHeight: "20px",
+          fontWeight: "bold",
         })
 
         let pText = css ({
@@ -144,7 +147,7 @@ class Login extends React.Component {
           margin: 0,
           fontSize: "12px",
           height: "12px",
-          fontWeight: "bold",
+          fontWeight: "700",
         })
 
         let inputErrorUser;
@@ -189,18 +192,28 @@ class Login extends React.Component {
                     </Helmet>
                         <div className="box-left">
                             <h1>Welcome</h1>
-                            <MdAssignmentTurnedIn color="#0a968b" className={icon}/>
+                            <MdAssignmentTurnedIn color="#1c9bfa" className={icon}/>
                             <h1>doToDo</h1>
                         </div>
                         <div className="box-right">
-                            <h3 className={textH3}>Log in Account</h3>
+                            <h3 className={textH3}>Log in</h3>
                            {errorMsg}
                             <Form
                                 onSubmit = {this.onSubmit} 
                                 error400 = {this.state.error400}
                                 error401 = {this.state.error401}
-                                email = {this.state.email} onChangeEmail = {this.onChangeEmail} valueUser = {this.state.valueUser} placeholderUser = {inputErrorUser} onFocusText={this.onRemovePlaceholderTextUser} onBlurText={this.onShowPlacehoderTextUser}
-                                password = {this.state.password} onChangePass = {this.onChangePass} valuePass =  {this.state.valuePass} placeholderPass = {inputErrorPass} onFocusPass={this.onRemovePlaceholderTextPass} onBlurPass={this.onShowPlacehoderTextPass}
+                                email = {this.state.email} 
+                                onChangeEmail = {this.onChangeEmail} 
+                                valueUser = {this.state.valueUser} 
+                                placeholderUser = {inputErrorUser} 
+                                onFocusText={this.onRemovePlaceholderTextUser} 
+                                onBlurText={this.onShowPlacehoderTextUser}
+                                password = {this.state.password} 
+                                onChangePass = {this.onChangePass} 
+                                valuePass =  {this.state.valuePass} 
+                                placeholderPass = {inputErrorPass} 
+                                onFocusPass={this.onRemovePlaceholderTextPass} 
+                                onBlurPass={this.onShowPlacehoderTextPass}
                                 textContent = "Login"
                             />
                             <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>

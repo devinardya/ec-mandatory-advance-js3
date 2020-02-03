@@ -50,34 +50,20 @@ class Form extends React.Component {
             color: 'white',
             fontWeight: "bold",
             fontSize: "13px",
-            width: "84%",
+            width: "81%",
             height: "40px", 
             margin: "20px 0",
             border: "none",
-            backgroundColor: "#0a968b",
+            backgroundColor: "#196ab1",
             ':hover': {
-              backgroundColor: "#0c867b",
+              backgroundColor: "#1c9bfa",
               cursor: "pointer",
               color: "white"
             },
           })
 
         let input;
-        input = css({
-            width: "80%",
-            height: "40px",
-            paddingLeft: "10px",
-            margin: "10px 0",
-            borderTop: "none",
-            borderLeft: "none",
-            borderRight: "none",
-            borderBottom: "4px solid #FFB200",
-            backgroundColor: "#F1F1F1",
-            fontSize: "14px",
-            "::placeholder": {
-                color: "rgb(94, 94, 94)"
-              }
-        })
+      
 
 
         //console.log(this.props.textPlaceholderUser )
@@ -117,8 +103,23 @@ class Form extends React.Component {
                   color: "red",
                 }
               })
+          } else {
+            input = css({
+                width: "80%",
+                height: "40px",
+                paddingLeft: "10px",
+                margin: "10px 0",
+                borderTop: "none",
+                borderLeft: "none",
+                borderRight: "none",
+                borderBottom: "4px solid #FFB200",
+                backgroundColor: "#F1F1F1",
+                fontSize: "14px",
+                "::placeholder": {
+                    color: "rgb(94, 94, 94)"
+                  }
+            })
           }
-       
           
 
         return ( <>

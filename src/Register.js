@@ -82,9 +82,9 @@ class Register extends React.Component {
           }
 
           let textH3 = css ({
-            color: "rgba(21,71,60,1)",
-            fontSize: "23px",
-            marginBottom: "20px",
+            color: "#196ab1",
+            fontSize: "35px",
+            marginBottom: "30px",
             width: "320px",
             fontFamily: 'Montserrat',
             fontWeight: "bold",
