@@ -13,7 +13,7 @@
 .register-box, .login-box {
     width: 100%;
     height: 100%;
-    max-width: 1500px;
+    max-width: 1040px;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -39,35 +39,34 @@
 
 }
 
-.box-left, .box-right {
+.box-right {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-}
-
-.box-right {
     width: 100%;
     height: 100%;
 }
+
 
 /* TODO COMPONENT */
 
 .todoBox {
     width: 100%;
     height: 100%;
-    max-width: 1500px;
+    max-width: 1040px;
    /* background-color: rgb(247, 247, 247);*/
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
     align-items: center;
+    background-color: #fafafa;
 }
 
 .header {
     display: flex;
     width: 100%;
-    height: 8%;
+    height: 7%;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
@@ -78,7 +77,7 @@
 .loginUser {
     color: white;
     margin-right: 15px;
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
 }
@@ -92,7 +91,7 @@
     background-color: transparent;
     border: none;
     color: white;
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     margin-left: 10px;
@@ -153,6 +152,7 @@
 .info-area h2 {
     margin-top: 0;
     color: orangered;
+    line-height: 25px;
 }
 
 .info-area hr {
@@ -289,15 +289,16 @@
 }
 
 .welcome-container{
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    height: 92%;
+    height: 93%;
     line-height: 25px;
     color: #737373;
-    max-width: 1500px;
+    max-width: 1040px;
+    background-color: #fafafa;
 }
 
 .welcome-container p {
@@ -313,7 +314,8 @@
 
 .welcome-container h2 {
     font-size: 40px;
-    margin-bottom: 50px;
+    margin: 0 0 50px 0;
+    color: orange;
 }
 
 @media only screen and (max-height:810px){

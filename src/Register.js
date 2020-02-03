@@ -89,7 +89,7 @@ class Register extends React.Component {
             backgroundColor: "#196ab1",
             borderRadius: "50%",
             padding: "20px",
-            marginBottom: "30px",
+            marginBottom: "50px",
         })
 
           let textH3 = css ({
@@ -160,23 +160,35 @@ class Register extends React.Component {
                     <Helmet>
                           <title>Create Account</title>
                     </Helmet>
-                    <Header valuePage = "welcome" testItem = "welcome"/>
+                    <Header testItem = "welcome"/>
                     <div className="welcome-container">
-                        <h3 className={textH3}>Create Account</h3>
-                        <MdAssignmentTurnedIn color="white" className={icon}/>
-                        {errorMsg}
-                        <Form
-                            onSubmit = {this.onSubmit} 
-                            error400 = {this.state.error400}
-                            error401 = {this.state.error401}
-                            email = {this.state.email} onChangeEmail = {this.onChangeEmail} valueUser = {this.state.valueUser} placeholderUser = {inputErrorUser} onFocusText={this.onRemovePlaceholderTextUser} onBlurText={this.onShowPlacehoderTextUser}
-                            password = {this.state.password} onChangePass = {this.onChangePass} valuePass =  {this.state.valuePass} placeholderPass = {inputErrorPass} onFocusPass={this.onRemovePlaceholderTextPass} onBlurPass={this.onShowPlacehoderTextPass}
-                            textContent = "Create Account"
-                        />
-                        <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>
-                    </div>   
-                </div>
-                )
+                        <div className="box-right">
+                            <h3 className={textH3}>Create Account</h3>
+                            <MdAssignmentTurnedIn color="white" className={icon}/>
+                            {errorMsg}
+                            <Form
+                                onSubmit = {this.onSubmit} 
+                                error400 = {this.state.error400}
+                                error401 = {this.state.error401}
+                                email = {this.state.email} 
+                                onChangeEmail = {this.onChangeEmail} 
+                                valueUser = {this.state.valueUser} 
+                                placeholderUser = {inputErrorUser} 
+                                onFocusText={this.onRemovePlaceholderTextUser} 
+                                onBlurText={this.onShowPlacehoderTextUser}
+                                password = {this.state.password} 
+                                onChangePass = {this.onChangePass} 
+                                valuePass =  {this.state.valuePass} 
+                                placeholderPass = {inputErrorPass} 
+                                onFocusPass={this.onRemovePlaceholderTextPass} 
+                                onBlurPass={this.onShowPlacehoderTextPass}
+                                textContent = "Create Account"
+                            />
+                            <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>
+                       </div>   
+                    </div>
+              </div>
+            )
     }
 }
 

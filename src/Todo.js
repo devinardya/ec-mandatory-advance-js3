@@ -202,7 +202,7 @@ class Todo extends React.Component {
 
       // to show the text inside the placeholder when input box is no longer on focus
       onShowPlacehoderText(){
-        this.setState({textPlaceholder : true})
+        this.setState({textPlaceholder : true, inputError: false})
       }
 
     render(){
@@ -253,8 +253,7 @@ class Todo extends React.Component {
                           </span>
                       </li>
                       )
-            
-            })
+                     })
         }
 
         let inputErrorMessage;

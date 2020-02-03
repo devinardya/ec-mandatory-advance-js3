@@ -78,7 +78,7 @@ class Welcome extends React.Component {
 
           
 
-        return <div className="todoBox">
+        return (<div className="todoBox">
                   <Helmet>
                       <title>To Do List</title>
                   </Helmet>
@@ -88,9 +88,8 @@ class Welcome extends React.Component {
                         <MdAssignmentTurnedIn color="white" className={icon}/>
                          <h1>doToDo</h1>
                          <p>doTodo is a general-purpose website which can be used for simple home lists. You can simply create your own to do list, mark it when it's done and remove it when you no longer need it. It's that easy!</p>
-                  </div>
-                  
-             </div>
+                  </div> 
+             </div>)
     
   }
 }
