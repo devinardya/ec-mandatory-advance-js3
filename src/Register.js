@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
+import { MdAssignmentTurnedIn } from "react-icons/md";
 import { css } from "glamor";
 import Form from './Form';
 import Header from './Header';
@@ -82,6 +83,15 @@ class Register extends React.Component {
             return <Redirect to="/login" />;
           }
 
+          let icon = css({
+            width: "80px",
+            height: "80px",
+            backgroundColor: "#196ab1",
+            borderRadius: "50%",
+            padding: "20px",
+            marginBottom: "30px",
+        })
+
           let textH3 = css ({
             color: "#196ab1",
             fontSize: "35px",
@@ -153,6 +163,7 @@ class Register extends React.Component {
                     <Header valuePage = "welcome" testItem = "welcome"/>
                     <div className="welcome-container">
                         <h3 className={textH3}>Create Account</h3>
+                        <MdAssignmentTurnedIn color="white" className={icon}/>
                         {errorMsg}
                         <Form
                             onSubmit = {this.onSubmit} 

@@ -113,7 +113,7 @@ class Login extends React.Component {
         let icon = css({
           width: "80px",
           height: "80px",
-          backgroundColor: "white",
+          backgroundColor: "#196ab1",
           borderRadius: "50%",
           padding: "20px",
           marginBottom: "30px",
@@ -194,6 +194,7 @@ class Login extends React.Component {
                         <div className="welcome-container">
                             <div className="box-right">
                                 <h3 className={textH3}>Log in</h3>
+                                <MdAssignmentTurnedIn color="white" className={icon}/>
                               {errorMsg}
                                 <Form
                                     onSubmit = {this.onSubmit} 
