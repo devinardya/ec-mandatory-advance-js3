@@ -106,7 +106,7 @@ class Login extends React.Component {
       render() {
 
         if (this.state.token) {
-            return <Redirect to="/" />;
+            return <Redirect to="/todo" />;
         } 
      
         let icon = css({

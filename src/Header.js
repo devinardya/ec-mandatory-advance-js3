@@ -9,7 +9,6 @@ class Header extends React.PureComponent{
         super(props);
 
         this.onClick = this.onClick.bind(this);
-        
     }
 
     onClick(){
@@ -48,6 +47,18 @@ class Header extends React.PureComponent{
             top: "3px"
         })
 
+       /*  let iconLogo = css({
+            width: "20px",
+            height: "20px",
+            backgroundColor: "#196ab1",
+            borderRadius: "50%",
+            padding: "5px",
+            marginBottom: "0px",
+            marginRight: "5px",
+            position: "relative",
+            top: "7px"
+        }) */
+
         console.log("render from header")
 
         let buttonOne;
@@ -55,13 +66,24 @@ class Header extends React.PureComponent{
         let homeButton;
 
         if(this.props.testItem === "todo"){
-            homeButton = <h3>doToDo</h3>
-            buttonOne =  <p className="loginUser">{this.props.user}</p>
-            buttonTwo =  <button onClick={this.props.logout} className="logoutButton">Log out</button>
+            homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;
+            buttonOne =  <p className="loginUser">{this.props.user}</p>;
+            buttonTwo =  <button onClick={this.props.logout} className="logoutButton">Log out</button>;
         } else if (this.props.testItem === "welcome"){
-            homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>
-            buttonOne = <p className="loginUser"><Link to="/register" className={pTextSpan}>Sign up</Link></p>
-            buttonTwo = <p className="logoutButton"><Link to="/login" className={pTextSpan}>Log in</Link></p>
+            homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;
+            buttonOne = <p className="loginUser"><Link to="/register" className={pTextSpan}>Sign up</Link></p>;
+            buttonTwo = <p className="logoutButton"><Link to="/login" className={pTextSpan}>Log in</Link></p>;
+        } else if (this.props.testItem === "home"){
+            if (this.props.activeToken === "Register"){
+                homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;
+                buttonOne = <p className="loginUser"><Link to="/register" className={pTextSpan}>Sign up</Link></p>;
+                buttonTwo = <p className="logoutButton"><Link to="/login" className={pTextSpan}>Log in</Link></p>;
+            }else {
+                homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;
+                buttonOne = <p className="loginUser">{this.props.activeToken}</p>;
+                buttonTwo =  <button onClick={this.props.logout} className="logoutButton">Log out</button>;
+            }
+            
         }
 
         return (<div className="header">

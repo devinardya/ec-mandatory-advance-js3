@@ -3,7 +3,7 @@ import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { TiTickOutline, TiTick, TiTimes } from "react-icons/ti"
+import { TiTickOutline, TiTick, TiDelete } from "react-icons/ti"
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
@@ -209,6 +209,7 @@ class Todo extends React.Component {
       onShowPlacehoderText(){
         this.setState({textPlaceholder : true, inputError: false})
       }
+      
 
     render(){
         
@@ -223,6 +224,7 @@ class Todo extends React.Component {
         let icon = css({
           color: "rgba(180, 180, 180, 0.5)", 
           position:"relative", 
+          top: "2px",
           right:"40px",
           ":hover":{
             color: "red",
@@ -242,7 +244,7 @@ class Todo extends React.Component {
               // controling which icon to use when the checklist is true or false
               let button;
               if (data.buttonState){
-                button = <TiTick size="25px"  style={{color: "orange"}}/>
+                button = <TiTick size="25px"  style={{color: "rgb(250, 142, 0)"}}/>
               } else {
                 button = <TiTickOutline size="25px"/>
               }
@@ -254,7 +256,7 @@ class Todo extends React.Component {
                           </span>
                           
                           <span className="deleteBtn">
-                              <button className={icon} onClick = {() => this.onDelete(data.id)}><TiTimes size="25px" /></button>
+                              <button className={icon} onClick = {() => this.onDelete(data.id)}><TiDelete size="25px" /></button>
                           </span>
                       </li>
                       )
