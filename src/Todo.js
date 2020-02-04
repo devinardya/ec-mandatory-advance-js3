@@ -3,9 +3,7 @@ import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { MdRadioButtonUnchecked } from "react-icons/md";
-import { MdCheckCircle } from "react-icons/md";
-import { MdClose } from "react-icons/md";
+import { MdRadioButtonUnchecked, MdCheckCircle, MdClose } from "react-icons/md";
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
@@ -149,7 +147,11 @@ class Todo extends React.Component {
         })
         .then( response => {
           console.log(response)
-          this.onGetData();
+          //this.onGetData();
+          const listIndex = this.state.data.findIndex (x => x.id === id);
+          let copyData = [...this.state.data]
+          copyData.splice(listIndex, 1)
+          this.setState({data: copyData})
        })
       }
 
@@ -335,7 +337,7 @@ class Todo extends React.Component {
 
         return <div className="todoBox">
                   <Helmet>
-                      <title>To Do List</title>
+                      <title>The To Do List</title>
                   </Helmet>
                   <Header user = {this.state.user}
                           logout = {this.logout}

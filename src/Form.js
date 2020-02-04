@@ -50,7 +50,7 @@ class Form extends React.Component {
             color: 'white',
             fontWeight: "bold",
             fontSize: "13px",
-            width: "81%",
+            width: "51%",
             height: "40px", 
             margin: "20px 0",
             border: "none",
@@ -66,7 +66,7 @@ class Form extends React.Component {
       
             if(this.props.error400){
               input = css({
-                width: "80%",
+                width: "50%",
                 height: "40px",
                 paddingLeft: "10px",
                 margin: "10px 0",
@@ -83,7 +83,7 @@ class Form extends React.Component {
               })
           } else if (this.props.error401){
             input = css({
-                width: "80%",
+                width: "50%",
                 height: "40px",
                 paddingLeft: "10px",
                 margin: "10px 0",
@@ -100,7 +100,7 @@ class Form extends React.Component {
               })
           } else {
             input = css({
-                width: "80%",
+                width: "50%",
                 height: "40px",
                 paddingLeft: "10px",
                 margin: "10px 0",

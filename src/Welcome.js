@@ -1,7 +1,7 @@
 import React from 'react';
 import {token$} from './store';
 import {Helmet} from "react-helmet";
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import { css } from "glamor";
 import { MdAssignmentTurnedIn } from "react-icons/md";
 import jwt from 'jsonwebtoken';
@@ -76,18 +76,23 @@ class Welcome extends React.Component {
             marginBottom: "0px",
         })
 
+        let link = css ({
+            color: "orange"
+        })
+
           
 
         return (<div className="todoBox">
                   <Helmet>
-                      <title>To Do List</title>
+                      <title>Welcome to doToDo</title>
                   </Helmet>
                   <Header testItem = "welcome"/>
                   <div className="welcome-container">
                          <h2>Welcome</h2>
                         <MdAssignmentTurnedIn color="white" className={icon}/>
                          <h1>doToDo</h1>
-                         <p>doTodo is a general-purpose website which can be used for simple home lists. You can simply create your own to do list, mark it when it's done and remove it when you no longer need it. It's that easy!</p>
+                         <p>doTodo is a general-purpose to-do creator website which can be used for simple home lists. You can simply create your own to do list, mark it when it's done and remove it when you no longer need it. It's that easy!</p>
+                         <h3><Link to="/register" className={link}>Sign up now!</Link></h3>
                   </div> 
              </div>)
     

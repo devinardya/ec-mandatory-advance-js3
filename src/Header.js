@@ -18,7 +18,7 @@ class Header extends React.PureComponent{
     render(){
 
         let pTextSpan = css ({
-            color: "white",
+            color: "#196ab1",
             fontWeight: "bold",
             textDecoration: "none",
             ":hover": {
@@ -28,7 +28,7 @@ class Header extends React.PureComponent{
 
         let h3TextSpan = css ({
             textDecoration: "none",
-            color: "white",
+            color: "#196ab1",
             ":hover": {
                 cursor: "pointer",
             }

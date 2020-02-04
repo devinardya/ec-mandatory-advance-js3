@@ -1,10 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import {token$, updateToken} from './store';
-import { MdAssignmentTurnedIn } from "react-icons/md";
+import { MdPerson } from "react-icons/md";
 import jwt from "jsonwebtoken";
 import { css } from "glamor";
 import Form from './Form';
@@ -109,24 +108,25 @@ class Login extends React.Component {
         if (this.state.token) {
             return <Redirect to="/" />;
         } 
-
+     
         let icon = css({
-          width: "80px",
-          height: "80px",
-          backgroundColor: "#196ab1",
+          width: "60px",
+          height: "60px",
+          backgroundColor: "orange",
           borderRadius: "50%",
           padding: "20px",
-          marginBottom: "50px",
+          marginBottom: "0px",
       })
 
         let textH3 = css ({
           color: "#196ab1",
           fontSize: "35px",
-          marginBottom: "30px",
+          marginBottom: "50px",
           width: "320px",
           fontFamily: 'Montserrat',
           lineHeight: "20px",
           fontWeight: "bold",
+          marginTop: "25px",
         })
 
         let pText = css ({
@@ -193,9 +193,9 @@ class Login extends React.Component {
                         <Header testItem = "welcome"/>
                         <div className="welcome-container">
                             <div className="box-right">
-                                <h3 className={textH3}>Log in</h3>
-                                <MdAssignmentTurnedIn color="white" className={icon}/>
-                              {errorMsg}
+                                <MdPerson color="white" className={icon}/>
+                                <h3 className={textH3}>Log in</h3> 
+                                {errorMsg}
                                 <Form
                                     onSubmit = {this.onSubmit} 
                                     error400 = {this.state.error400}
@@ -214,7 +214,7 @@ class Login extends React.Component {
                                     onBlurPass={this.onShowPlacehoderTextPass}
                                     textContent = "Login"
                                 />
-                                <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Register here!</Link></span></p>
+                                <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Sign up here!</Link></span></p>
                             </div>
                         </div>
                 </div>

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { MdAssignmentTurnedIn } from "react-icons/md";
+import { MdPersonAdd } from "react-icons/md";
 import { css } from "glamor";
 import Form from './Form';
 import Header from './Header';
@@ -63,11 +63,11 @@ class Register extends React.Component {
     }
 
     onRemovePlaceholderTextUser(){
-      this.setState({textPlaceholderUser: false})
+      this.setState({textPlaceholderUser: false, error400:false, error401: false})
   }
 
     onShowPlacehoderTextUser(){
-      this.setState({textPlaceholderUser: true})
+      this.setState({textPlaceholderUser: true, error400:false, error401: false})
   }
 
     onRemovePlaceholderTextPass(){
@@ -84,22 +84,23 @@ class Register extends React.Component {
           }
 
           let icon = css({
-            width: "80px",
-            height: "80px",
-            backgroundColor: "#196ab1",
+            width: "60px",
+            height: "60px",
+            backgroundColor: "orange",
             borderRadius: "50%",
             padding: "20px",
-            marginBottom: "50px",
+            marginBottom: "0px",
         })
 
           let textH3 = css ({
             color: "#196ab1",
             fontSize: "35px",
-            marginBottom: "30px",
+            marginBottom: "50px",
             width: "320px",
             fontFamily: 'Montserrat',
             fontWeight: "bold",
             lineHeight: "20px",
+            marginTop: "25px",
           })
 
           let pText = css ({
@@ -158,13 +159,13 @@ class Register extends React.Component {
 
         return (<div className ="register-box">
                     <Helmet>
-                          <title>Create Account</title>
+                          <title>Sign Up</title>
                     </Helmet>
                     <Header testItem = "welcome"/>
                     <div className="welcome-container">
                         <div className="box-right">
+                            <MdPersonAdd color="white" className={icon}/> 
                             <h3 className={textH3}>Create Account</h3>
-                            <MdAssignmentTurnedIn color="white" className={icon}/>
                             {errorMsg}
                             <Form
                                 onSubmit = {this.onSubmit} 
