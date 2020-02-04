@@ -3,7 +3,7 @@ import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { MdRadioButtonUnchecked, MdCheckCircle, MdClose } from "react-icons/md";
+import { TiTickOutline, TiTick, TiTimes } from "react-icons/ti"
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
@@ -148,10 +148,13 @@ class Todo extends React.Component {
         .then( response => {
           console.log(response)
           //this.onGetData();
+          //delete the data locally, to avoid calling the server 
           const listIndex = this.state.data.findIndex (x => x.id === id);
           let copyData = [...this.state.data]
           copyData.splice(listIndex, 1)
           this.setState({data: copyData})
+       }).catch(err => {
+         console.log(err)
        })
       }
 
@@ -239,9 +242,9 @@ class Todo extends React.Component {
               // controling which icon to use when the checklist is true or false
               let button;
               if (data.buttonState){
-                button = <MdCheckCircle size="20px"  style={{color: "orange"}}/>
+                button = <TiTick size="25px"  style={{color: "orange"}}/>
               } else {
-                button = <MdRadioButtonUnchecked size="20px"/>
+                button = <TiTickOutline size="25px"/>
               }
 
               return (<li key= {data.id}>
@@ -251,7 +254,7 @@ class Todo extends React.Component {
                           </span>
                           
                           <span className="deleteBtn">
-                              <button className={icon} onClick = {() => this.onDelete(data.id)}><MdClose size="25px" /></button>
+                              <button className={icon} onClick = {() => this.onDelete(data.id)}><TiTimes size="25px" /></button>
                           </span>
                       </li>
                       )

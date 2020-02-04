@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { TiInputChecked } from "react-icons/ti";
 import { css } from "glamor";
 
 class Header extends React.PureComponent{
@@ -34,6 +35,19 @@ class Header extends React.PureComponent{
             }
         })
 
+
+        let icon = css({
+            width: "20px",
+            height: "20px",
+            backgroundColor: "#196ab1",
+            borderRadius: "50%",
+            padding: "5px",
+            marginBottom: "0px",
+            marginRight: "5px",
+            position: "relative",
+            top: "3px"
+        })
+
         console.log("render from header")
 
         let buttonOne;
@@ -45,7 +59,7 @@ class Header extends React.PureComponent{
             buttonOne =  <p className="loginUser">{this.props.user}</p>
             buttonTwo =  <button onClick={this.props.logout} className="logoutButton">Log out</button>
         } else if (this.props.testItem === "welcome"){
-            homeButton = <h3><Link to="/" className={h3TextSpan}>doToDo</Link></h3>
+            homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>
             buttonOne = <p className="loginUser"><Link to="/register" className={pTextSpan}>Sign up</Link></p>
             buttonTwo = <p className="logoutButton"><Link to="/login" className={pTextSpan}>Log in</Link></p>
         }

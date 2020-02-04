@@ -3,7 +3,7 @@ import {Redirect, Link} from 'react-router-dom';
 import axios from 'axios';
 import {Helmet} from "react-helmet";
 import {token$, updateToken} from './store';
-import { MdPerson } from "react-icons/md";
+import { TiUser } from "react-icons/ti"
 import jwt from "jsonwebtoken";
 import { css } from "glamor";
 import Form from './Form';
@@ -185,7 +185,6 @@ class Login extends React.Component {
           
           }
 
-
         return (<div className ="login-box">
                     <Helmet>
                           <title>Log In Account</title>
@@ -193,7 +192,7 @@ class Login extends React.Component {
                         <Header testItem = "welcome"/>
                         <div className="welcome-container">
                             <div className="box-right">
-                                <MdPerson color="white" className={icon}/>
+                                <TiUser color="white" className={icon}/>
                                 <h3 className={textH3}>Log in</h3> 
                                 {errorMsg}
                                 <Form

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {Helmet} from "react-helmet";
 import {Redirect} from 'react-router-dom';
-import { MdPersonAdd } from "react-icons/md";
+import { TiUserAdd } from "react-icons/ti"
 import { css } from "glamor";
 import Form from './Form';
 import Header from './Header';
@@ -164,7 +164,7 @@ class Register extends React.Component {
                     <Header testItem = "welcome"/>
                     <div className="welcome-container">
                         <div className="box-right">
-                            <MdPersonAdd color="white" className={icon}/> 
+                            <TiUserAdd color="white" className={icon}/> 
                             <h3 className={textH3}>Create Account</h3>
                             {errorMsg}
                             <Form

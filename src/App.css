@@ -19,7 +19,9 @@
     flex-flow: column wrap;
     justify-content: flex-start;
     align-items: center;
-    background-color: #fafafa;
+    /* background-color: #fafafa; */
+    background: #fafafa;
+    background: linear-gradient(171deg, rgba(250,250,250,1) 0%, rgba(250,250,250,1) 52%, rgba(25,106,177,1) 52%, rgba(28,155,250,1) 100%);
 }
 
 .register-box form, .login-box form {
@@ -62,12 +64,13 @@
     justify-content: flex-start;
     align-items: center;
     background-color: #fafafa;
+    
 }
 
 .header {
     display: flex;
     width: 100%;
-    height: calc(8% - 10px);
+    height: 8%;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
@@ -114,7 +117,9 @@
     letter-spacing: -3px;
     justify-self: flex-start;
     margin: 0 0 0 30px;
-    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    vertical-align: middle;
 }
 
 .header-right {
@@ -275,13 +280,13 @@
     margin-right: 25px;
     width: calc(95% - 50px);
     vertical-align: middle;
-    padding: 15px 0 15px 15px;
+    padding: 15px 0 8px 15px;
     display: flex;
 }
 
 .liText span:first-child {
     position: relative;
-    top: 2px;
+    top: -2px;
     margin-right: 15px;
 }
 
@@ -303,7 +308,8 @@
     line-height: 25px;
     color: #737373;
     max-width: 1040px;
-    background-color: #fafafa;
+    position: relative;
+    background: #fafafa;
 }
 
 .welcome-container p {
