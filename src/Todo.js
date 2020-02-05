@@ -7,7 +7,7 @@ import { TiTickOutline, TiTick, TiDelete } from "react-icons/ti"
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
-
+import Footer from './Footer';
 
 let url = 'http://3.120.96.16:3002/todos';
 
@@ -382,7 +382,7 @@ class Todo extends React.Component {
                       </div>
                     
                   </div>
-                  
+                  <Footer />
              </div>
     
   }

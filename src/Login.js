@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 import { css } from "glamor";
 import Form from './Form';
 import Header from './Header';
-
+import Footer from './Footer';
 
 class Login extends React.Component {
     constructor(props) {
@@ -189,33 +189,34 @@ class Login extends React.Component {
                     <Helmet>
                           <title>doTodo - Log in</title>
                     </Helmet>
-                        <Header testItem = "welcome"/>
-                        <div className="login-container">
-                            <div className="box-right">
-                                <TiUser color="white" className={icon}/>
-                                <h3 className={textH3}>Log in</h3> 
-                                {errorMsg}
-                                <Form
-                                    onSubmit = {this.onSubmit} 
-                                    error400 = {this.state.error400}
-                                    error401 = {this.state.error401}
-                                    email = {this.state.email} 
-                                    onChangeEmail = {this.onChangeEmail} 
-                                    valueUser = {this.state.valueUser} 
-                                    placeholderUser = {inputErrorUser} 
-                                    onFocusText={this.onRemovePlaceholderTextUser} 
-                                    onBlurText={this.onShowPlacehoderTextUser}
-                                    password = {this.state.password} 
-                                    onChangePass = {this.onChangePass} 
-                                    valuePass =  {this.state.valuePass} 
-                                    placeholderPass = {inputErrorPass} 
-                                    onFocusPass={this.onRemovePlaceholderTextPass} 
-                                    onBlurPass={this.onShowPlacehoderTextPass}
-                                    textContent = "Login"
-                                />
-                                <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Sign up here!</Link></span></p>
-                            </div>
+                    <Header testItem = "welcome"/>
+                    <div className="login-container">
+                        <div className="box-right">
+                            <TiUser color="white" className={icon}/>
+                            <h3 className={textH3}>Log in</h3> 
+                            {errorMsg}
+                            <Form
+                                onSubmit = {this.onSubmit} 
+                                error400 = {this.state.error400}
+                                error401 = {this.state.error401}
+                                email = {this.state.email} 
+                                onChangeEmail = {this.onChangeEmail} 
+                                valueUser = {this.state.valueUser} 
+                                placeholderUser = {inputErrorUser} 
+                                onFocusText={this.onRemovePlaceholderTextUser} 
+                                onBlurText={this.onShowPlacehoderTextUser}
+                                password = {this.state.password} 
+                                onChangePass = {this.onChangePass} 
+                                valuePass =  {this.state.valuePass} 
+                                placeholderPass = {inputErrorPass} 
+                                onFocusPass={this.onRemovePlaceholderTextPass} 
+                                onBlurPass={this.onShowPlacehoderTextPass}
+                                textContent = "Login"
+                            />
+                            <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Sign up here!</Link></span></p>
                         </div>
+                    </div>
+                    <Footer/>
                 </div>
         )
       }

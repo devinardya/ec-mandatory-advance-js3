@@ -7,7 +7,10 @@ import { css } from "glamor";
 import { TiTick, TiThList, TiTimes } from "react-icons/ti";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
-import headerimage from './header-image.jpg'
+import Footer from './Footer';
+//import headerimage from './header-image.jpg';
+import background from './background.png';
+import backgroundOnline from './background-online.png';
 
 let url = 'http://3.120.96.16:3002/todos';
 
@@ -112,11 +115,12 @@ class Welcome extends React.Component {
           fontSize: "12px",
           padding: "10px",
           background: "#fba108",
-          margin: "0px 15px 25px 15px",
+          margin: "-50px 15px 25px 15px",
           color: "white",
           borderRadius: "50%",
           textDecoration: "none",
           fontWeight: "bold",
+          zIndex: 1,
         })
 
         let linkButton = css ({
@@ -134,10 +138,10 @@ class Welcome extends React.Component {
         })
 
         let image = css({
-          width: "100%",
-          height: "calc(45% - 50px)",
+          height: "55%",
           objectFit: "cover",
-          marginBottom: "50px",
+          marginBottom: "50px", 
+          position: "absolute",
         })
 
         let pText = css ({
@@ -158,8 +162,10 @@ class Welcome extends React.Component {
             activeToken = this.state.user;
             pageTitle = <title>Welcome, {this.state.user}</title>
             ctaButton = <Link to="/todo" style= {{textDecoration: "none", color: "white", fontSize: "15px", fontWeight: "bold"}}><div className={linkButton}>Jump to list!</div></Link>
-            grettings = ( <>
-                            <img className={image} src={headerimage} alt="headerimage" />
+            grettings = (<>   
+                            <div className = "welcome-top">
+                                <img className={image} src={backgroundOnline} alt="headerimage" />
+                            </div>
                             <div className="welcome-content">
                                 <div className="welcome-sidebar">
                                       <div className="counter">
@@ -179,7 +185,9 @@ class Welcome extends React.Component {
             pageTitle = <title>doTodo</title>
             ctaButton = <h3><Link to="/register" className={link}>Sign up now!</Link></h3>
             grettings = (<>
-                          <img className={image} src={headerimage} alt="headerimage" />
+                          <div className = "welcome-top">
+                                <img className={image} src={background} alt="headerimage" />
+                            </div>
                           <div className={iconRow}>
                               <div className={iconRowSpan}><TiThList size="80px" color="white"/>Make new list</div>
                               <div to="/todo" className={iconRowSpan}><TiTick size="80px" color="white"/>Done the list</div>
@@ -200,6 +208,7 @@ class Welcome extends React.Component {
                   <div className="welcome-container">
                       {grettings}
                   </div> 
+                  <Footer/>
              </div>)
     
   }

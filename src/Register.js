@@ -7,6 +7,7 @@ import { TiUserAdd } from "react-icons/ti"
 import { css } from "glamor";
 import Form from './Form';
 import Header from './Header';
+import Footer from './Footer';
 
 class Register extends React.Component {
     constructor(props){
@@ -188,6 +189,7 @@ class Register extends React.Component {
                             <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>
                        </div>   
                     </div>
+                    <Footer/>
               </div>
             )
     }
