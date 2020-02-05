@@ -113,7 +113,7 @@ class Login extends React.Component {
           width: "60px",
           height: "60px",
           backgroundColor: "orange",
-          borderRadius: "50%",
+          borderRadius: "50% 0% 50% 50%",
           padding: "20px",
           marginBottom: "0px",
       })
@@ -121,7 +121,7 @@ class Login extends React.Component {
         let textH3 = css ({
           color: "#196ab1",
           fontSize: "35px",
-          marginBottom: "50px",
+          marginBottom: "30px",
           width: "320px",
           fontFamily: 'Montserrat',
           lineHeight: "20px",
@@ -190,7 +190,7 @@ class Login extends React.Component {
                           <title>Log In Account</title>
                     </Helmet>
                         <Header testItem = "welcome"/>
-                        <div className="welcome-container">
+                        <div className="login-container">
                             <div className="box-right">
                                 <TiUser color="white" className={icon}/>
                                 <h3 className={textH3}>Log in</h3> 

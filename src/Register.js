@@ -86,8 +86,8 @@ class Register extends React.Component {
           let icon = css({
             width: "60px",
             height: "60px",
-            backgroundColor: "orange",
-            borderRadius: "50%",
+            backgroundColor: "#196ab1",
+            borderRadius: "0 50% 50% 50%",
             padding: "20px",
             marginBottom: "0px",
         })
@@ -95,7 +95,7 @@ class Register extends React.Component {
           let textH3 = css ({
             color: "#196ab1",
             fontSize: "35px",
-            marginBottom: "50px",
+            marginBottom: "30px",
             width: "320px",
             fontFamily: 'Montserrat',
             fontWeight: "bold",
@@ -118,7 +118,7 @@ class Register extends React.Component {
 
           let errMsg = css ({
             color: "red",
-            marginTop: 0,
+            margin: "0",
             fontSize: "12px",
             height: "12px",
             fontWeight: "bold",
@@ -162,10 +162,10 @@ class Register extends React.Component {
                           <title>Sign Up</title>
                     </Helmet>
                     <Header testItem = "welcome"/>
-                    <div className="welcome-container">
+                    <div className="login-container">
                         <div className="box-right">
                             <TiUserAdd color="white" className={icon}/> 
-                            <h3 className={textH3}>Create Account</h3>
+                            <h3 className={textH3}>Sign Up</h3>
                             {errorMsg}
                             <Form
                                 onSubmit = {this.onSubmit} 

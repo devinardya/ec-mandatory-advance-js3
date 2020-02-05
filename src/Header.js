@@ -39,7 +39,7 @@ class Header extends React.PureComponent{
             width: "20px",
             height: "20px",
             backgroundColor: "#196ab1",
-            borderRadius: "50%",
+            borderRadius: " 0 50% 50% 50%",
             padding: "5px",
             marginBottom: "0px",
             marginRight: "5px",

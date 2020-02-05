@@ -1,12 +1,15 @@
 import React from 'react';
+import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
-import {Redirect, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { css } from "glamor";
-import { TiInputChecked, TiTick, TiThList, TiTimes } from "react-icons/ti";
+import { TiTick, TiThList, TiTimes } from "react-icons/ti";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
+import headerimage from './header-image.jpg'
 
+let url = 'http://3.120.96.16:3002/todos';
 
 class Welcome extends React.Component {
     constructor(props) {
@@ -15,6 +18,7 @@ class Welcome extends React.Component {
         this.state = {
           user: "",
           token: token$.value,
+          data: [],
         };
         this.logout = this.logout.bind(this);
    
@@ -32,7 +36,34 @@ class Welcome extends React.Component {
           }
         });
 
+          if (this.state.token){
+            this.onGetData();
+        }
       }
+      
+      onGetData(){
+
+        let CancelToken = axios.CancelToken;
+        this.source = CancelToken.source();
+      
+        axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${this.state.token}`
+            },
+          },{
+            cancelToken: this.source.token,
+          })
+          .then(response => {   
+            console.log(response.data.todos);
+            this.setState({data: response.data.todos});     
+          })
+          .catch(e => {
+            console.error(e);
+            updateToken(null);
+          });
+      }
+
+   
 
       // to clean up the component before login out
       componentWillUnmount(){
@@ -51,6 +82,9 @@ class Welcome extends React.Component {
         let activeToken;
         let ctaButton;
         let grettings;
+        let dataLength;
+        let textInfo;
+        let pageTitle;
 
         let link = css ({
           color: "rgb(252, 156, 11)",
@@ -59,15 +93,6 @@ class Welcome extends React.Component {
           ":hover": {
             color: "orangered",
           }
-      })
-
-        let icon = css({
-          width: "80px",
-          height: "80px",
-          backgroundColor: "#196ab1",
-          borderRadius: "50%",
-          padding: "15px",
-          marginBottom: "-10px",
       })
 
         let iconRow = css ({
@@ -86,12 +111,12 @@ class Welcome extends React.Component {
           alignItems: "center",
           fontSize: "12px",
           padding: "10px",
-          backgroundColor: "#196ab1",
-          margin: "0px 10px",
+          background: "#fba108",
+          margin: "0px 15px 25px 15px",
           color: "white",
           borderRadius: "50%",
-          marginBottom:"25px",
           textDecoration: "none",
+          fontWeight: "bold",
         })
 
         let linkButton = css ({
@@ -101,31 +126,65 @@ class Welcome extends React.Component {
           padding: "10px",
           textDecoration: "none",
           verticalAlign:"middle",
-          marginTop: "40px",
-          borderRadius: "40px"
+          marginTop: "30px",
+          borderRadius: "40px",
+          ":hover": {
+            backgroundColor: "#ff7100",
+          }
         })
+
+        let image = css({
+          width: "100%",
+          height: "calc(45% - 50px)",
+          objectFit: "cover",
+          marginBottom: "50px",
+        })
+
+        let pText = css ({
+          fontSize: "18px",
+          fontWeight: "bold",
+        })
+
+        if(this.state.data !== undefined && this.state.data.length >= 1){
+          dataLength = this.state.data.length;
+          textInfo = "Do not forget to check your list to make sure you did not miss anything!";
+        } else if (this.state.data.length === 0){
+          dataLength = "0";
+          textInfo = "Time to organize your day and create a list!"
+        }
 
         if (this.state.token) {
             //return <Redirect to="/" />;
             activeToken = this.state.user;
-            ctaButton = <div className={linkButton}><Link to="/todo" style= {{textDecoration: "none", color: "white", fontSize: "15px", fontWeight: "bold"}}>To your list!</Link></div>
-            grettings = (<>
-                          <h2>Hi, {this.state.user}</h2>
-                          <div className={iconRow}>
-                              <Link to="/todo" className={iconRowSpan}><TiTick size="80px" color="white"/>Done the list</Link>
-                              <Link to="/todo" className={iconRowSpan}><TiThList size="80px" color="white"/>Make new list</Link>
-                              <Link to="/todo" className={iconRowSpan}><TiTimes size="80px" color="white"/>Remove the list</Link>
+            pageTitle = <title>Welcome, {this.state.user}</title>
+            ctaButton = <Link to="/todo" style= {{textDecoration: "none", color: "white", fontSize: "15px", fontWeight: "bold"}}><div className={linkButton}>Jump to list!</div></Link>
+            grettings = ( <>
+                            <img className={image} src={headerimage} alt="headerimage" />
+                            <div className="welcome-content">
+                                <div className="welcome-sidebar">
+                                      <div className="counter">
+                                         <h3>{dataLength}</h3>
+                                      </div>
+                                </div>
+                                <div className="welcome-textbox">
+                                    <h3>Hi, {this.state.user}</h3>
+                                    <p className={pText}>Currently you have {dataLength} items on your to-do list.</p>
+                                    <p>{textInfo}</p>
+                                    {ctaButton}
+                                </div>
                           </div>
-                          <p>doTodo is a general-purpose to-do creator website which can be used for simple home lists. You can simply create your own to do list, mark it when it's done and remove it when you no longer need it. It's that easy!</p>
-                          {ctaButton}
                         </>)
         } else {
             activeToken = "Register";
+            pageTitle = <title>Welcome to doTodo</title>
             ctaButton = <h3><Link to="/register" className={link}>Sign up now!</Link></h3>
             grettings = (<>
-                          <h2>Welcome</h2>
-                          <TiInputChecked color="white" className={icon}/>
-                          <h1>doToDo</h1>
+                          <img className={image} src={headerimage} alt="headerimage" />
+                          <div className={iconRow}>
+                              <div className={iconRowSpan}><TiThList size="80px" color="white"/>Make new list</div>
+                              <div to="/todo" className={iconRowSpan}><TiTick size="80px" color="white"/>Done the list</div>
+                              <div to="/todo" className={iconRowSpan}><TiTimes size="80px" color="white"/>Remove the list</div>
+                          </div>
                           <p>doTodo is a general-purpose to-do creator website which can be used for simple home lists. You can simply create your own to do list, mark it when it's done and remove it when you no longer need it. It's that easy!</p>
                           {ctaButton}
                         </>)
@@ -133,7 +192,7 @@ class Welcome extends React.Component {
         
         return (<div className="todoBox">
                   <Helmet>
-                      <title>Welcome to doToDo</title>
+                      {pageTitle}
                   </Helmet>
                   <Header testItem = "home" 
                           activeToken = {activeToken}

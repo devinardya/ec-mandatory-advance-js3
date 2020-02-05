@@ -46,22 +46,8 @@ class Form extends React.Component {
   }
 
     render(){
-        let rule = css({
-            color: 'white',
-            fontWeight: "bold",
-            fontSize: "13px",
-            width: "51%",
-            height: "40px", 
-            margin: "20px 0",
-            border: "none",
-            backgroundColor: "#196ab1",
-            ':hover': {
-              backgroundColor: "#1c9bfa",
-              cursor: "pointer",
-              color: "white"
-            },
-          })
 
+        let submitButton;
         let input;
       
             if(this.props.error400){
@@ -115,6 +101,40 @@ class Form extends React.Component {
                   }
             })
           }
+
+          if(this.props.textContent === "Login"){
+              submitButton =  css({
+                color: 'white',
+                fontWeight: "bold",
+                fontSize: "13px",
+                width: "51%",
+                height: "40px", 
+                margin: "20px 0",
+                border: "none",
+                backgroundColor: "#FFAA00",
+                ':hover': {
+                  backgroundColor: "#FFC500",
+                  cursor: "pointer",
+                  color: "white"
+                },
+              })
+          } else {
+              submitButton = css({
+                color: 'white',
+                fontWeight: "bold",
+                fontSize: "13px",
+                width: "51%",
+                height: "40px", 
+                margin: "20px 0",
+                border: "none",
+                backgroundColor: "#196ab1",
+                ':hover': {
+                  backgroundColor: "#1c9bfa",
+                  cursor: "pointer",
+                  color: "white"
+                },
+              })
+          }
           
 
         return ( <>
@@ -135,7 +155,7 @@ class Form extends React.Component {
                             onFocus={this.props.onFocusPass} 
                             onBlur={this.props.onBlurPass}
                             value = {this.props.valuePass}/>
-                        <button type="submit" className={rule}>{this.props.textContent}</button>
+                        <button type="submit" className={submitButton}>{this.props.textContent}</button>
                     </form>
                  </>
         )

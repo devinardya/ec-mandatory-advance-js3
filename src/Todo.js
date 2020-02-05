@@ -215,7 +215,7 @@ class Todo extends React.Component {
         
       // if the token is not valid or no longer valid, then the page should be automatically redirect to the login page
         if (!this.state.token) {
-            return <Redirect to="/welcome" />;
+            return <Redirect to="/" />;
           }
 
         let datas = [];
