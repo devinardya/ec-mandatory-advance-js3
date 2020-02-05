@@ -159,7 +159,7 @@ class Register extends React.Component {
 
         return (<div className ="register-box">
                     <Helmet>
-                          <title>Sign Up</title>
+                          <title>doTodo - Sign Up</title>
                     </Helmet>
                     <Header testItem = "welcome"/>
                     <div className="login-container">

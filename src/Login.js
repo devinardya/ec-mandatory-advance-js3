@@ -187,7 +187,7 @@ class Login extends React.Component {
 
         return (<div className ="login-box">
                     <Helmet>
-                          <title>Log In Account</title>
+                          <title>doTodo - Log in</title>
                     </Helmet>
                         <Header testItem = "welcome"/>
                         <div className="login-container">

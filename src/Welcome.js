@@ -176,7 +176,7 @@ class Welcome extends React.Component {
                         </>)
         } else {
             activeToken = "Register";
-            pageTitle = <title>Welcome to doTodo</title>
+            pageTitle = <title>doTodo</title>
             ctaButton = <h3><Link to="/register" className={link}>Sign up now!</Link></h3>
             grettings = (<>
                           <img className={image} src={headerimage} alt="headerimage" />
