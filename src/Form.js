@@ -63,6 +63,7 @@ class Form extends React.Component {
                 backgroundColor: "#F1F1F1",
                 fontSize: "14px",
                 border: "2px solid red",
+                color: "#737373",
                 "::placeholder": {
                   color: "red",
                 }
@@ -80,6 +81,7 @@ class Form extends React.Component {
                 backgroundColor: "#F1F1F1",
                 fontSize: "14px",
                 border: "2px solid red",
+                color: "#737373",
                 "::placeholder": {
                   color: "red",
                 }
@@ -96,6 +98,7 @@ class Form extends React.Component {
                 borderBottom: "4px solid #FFB200",
                 backgroundColor: "#F1F1F1",
                 fontSize: "14px",
+                color: "#737373",
                 "::placeholder": {
                     color: "rgb(94, 94, 94)"
                   }
