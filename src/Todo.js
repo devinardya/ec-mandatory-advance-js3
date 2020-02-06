@@ -75,6 +75,7 @@ class Todo extends React.Component {
           })
           .then ( () => {
             // adding a new key to the data, to be able to control the check button next to the list
+            console.log(this.state.data)
             let datas = this.state.data;
             datas.map(data => {
               return data.buttonState = false;

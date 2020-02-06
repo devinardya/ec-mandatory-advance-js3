@@ -251,9 +251,9 @@ footer p {
 .content ul {
     list-style-type: none;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -395,7 +395,7 @@ footer p {
     flex-flow: column wrap;
     justify-content: center;
     align-items: flex-start;
-    margin: 50px 20px 0 15px;
+    margin: 20px 20px 0 15px;
 }
 
 
@@ -404,7 +404,7 @@ footer p {
     height: 200px;
     background-color: #3389d4;
     position: relative;
-    margin: -90px 0 0 0;
+    margin: -120px 0 0 0;
     padding: 0;
     border-radius: 50% 0% 50% 50%;
 }
@@ -422,6 +422,11 @@ footer p {
     text-align: left;
     width: 100%;
 }
+
+.welcome-textbox h3 {
+    font-size: 25px;
+}
+
 
 @media only screen and (max-height:1010px){
     .todolist {

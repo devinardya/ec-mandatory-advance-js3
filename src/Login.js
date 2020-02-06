@@ -123,7 +123,7 @@ class Login extends React.Component {
           fontSize: "35px",
           marginBottom: "30px",
           width: "320px",
-          fontFamily: 'Montserrat',
+          fontFamily: 'Montserrat, sans-serif',
           lineHeight: "20px",
           fontWeight: "bold",
           marginTop: "25px",

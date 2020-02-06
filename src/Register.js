@@ -98,7 +98,7 @@ class Register extends React.Component {
             fontSize: "35px",
             marginBottom: "30px",
             width: "320px",
-            fontFamily: 'Montserrat',
+            fontFamily: 'Montserrat, sans-serif',
             fontWeight: "bold",
             lineHeight: "20px",
             marginTop: "25px",

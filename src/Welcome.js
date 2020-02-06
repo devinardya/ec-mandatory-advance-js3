@@ -142,6 +142,7 @@ class Welcome extends React.Component {
           objectFit: "cover",
           marginBottom: "50px", 
           position: "absolute",
+          zIndex: "0",
         })
 
         let pText = css ({
@@ -175,7 +176,7 @@ class Welcome extends React.Component {
                                 <div className="welcome-textbox">
                                     <h3>Hi, {this.state.user}</h3>
                                     <p className={pText}>Currently you have {dataLength} items on your to-do list.</p>
-                                    <p>{textInfo}</p>
+                                    <p style = {{marginTop: "0px"}}>{textInfo}</p>
                                     {ctaButton}
                                 </div>
                           </div>
