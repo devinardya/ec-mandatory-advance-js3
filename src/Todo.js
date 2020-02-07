@@ -132,11 +132,12 @@ class Todo extends React.Component {
        .catch ( err => {
          // when error occurs, fetching the error messages from the server and save it on a local state to pass it to the render
          console.log(err.response.data);
-         this.setState({inputError: true, 
-                        textPlaceholder: true,
-                        errorMsg: err.response.data.details[0].message})
+         if(this.state.token){
+          this.setState({inputError: true, 
+            textPlaceholder: true,
+            errorMsg: err.response.data.details[0].message})
+         }
        })
-       
       }
 
       //removing a spesific item inside the list by sending it's id to the server
@@ -275,7 +276,7 @@ class Todo extends React.Component {
           fontSize: "12px",
           fontWeight: "bold",
           marginLeft: "30px",
-          width: "calc(70% - 30px)",
+          width: "calc(80% - 30px)",
           height: "calc(100% - 10px)",
           marginBottom: "5px",
         })
@@ -283,7 +284,7 @@ class Todo extends React.Component {
         counter = css ({
           fontSize: "12px",
           color: "#737373",
-          width: "30%",
+          width: "20%",
           height: "100%",
           textAlign: "right",
           margin: "0px",
@@ -333,7 +334,7 @@ class Todo extends React.Component {
             counter = css ({
               fontSize: "12px",
               color: "red",
-              width: "30%",
+              width: "20%",
               height: "100%",
               textAlign: "right",
               margin: "0px",
