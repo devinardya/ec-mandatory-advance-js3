@@ -3,7 +3,7 @@ import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect, Link} from 'react-router-dom';
-import { TiTickOutline, TiTick, TiDelete, TiHome, TiPower } from "react-icons/ti"
+import { TiTickOutline, TiTick, TiDelete, TiHome, TiPower, TiWarning } from "react-icons/ti"
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
@@ -24,6 +24,8 @@ class Todo extends React.Component {
           idStat: false,
           textPlaceholder: true,
           errorMsg: "",
+          endSessionAlert: false,
+          endSessionMsg: "",
         };
 
         this.source = undefined;
@@ -35,6 +37,7 @@ class Todo extends React.Component {
         this.radioBtnChange = this.radioBtnChange.bind(this);
         this.onRemovePlaceholderText = this.onRemovePlaceholderText.bind(this);
         this.onShowPlacehoderText = this.onShowPlacehoderText.bind(this);
+        this.endSessionOption = this.endSessionOption.bind(this);
       }
 
       componentDidMount() {
@@ -87,12 +90,14 @@ class Todo extends React.Component {
             
             console.error(e);
             updateToken(null);
+            this.setState({endSessionMsg: "home"})
           });
       }
 
       // a function that called when log out, sending null parameter to the store.js that remove the token, hence making it not valid any longer
       logout() {
         updateToken(null);
+        this.setState({endSessionMsg: "home"})
       }
 
       onChange(e){
@@ -135,7 +140,7 @@ class Todo extends React.Component {
             
              // if token is already expired, then unsubscribe to token and redirect to home
             if (err.response.data.message === "Unauthorized") {
-                updateToken(null);
+                this.setState({endSessionAlert: true})
             } else if (err.response.data.message === "Validation error"){ // if there is an error in input, then fetch the error message from the server
                 this.setState({inputError: true, 
                 textPlaceholder: true,
@@ -163,7 +168,8 @@ class Todo extends React.Component {
          console.log(err)
          // if token is already expired, then unsubscribe to token and redirect to home
          if (err.response.data.message === "Unauthorized") {
-          updateToken(null);
+           //updateToken(null);
+           this.setState({endSessionAlert: true})
          }
        })
       }
@@ -191,6 +197,7 @@ class Todo extends React.Component {
       componentDidUpdate(){
         if (!this.state.token){
           updateToken(null);
+          this.setState({endSessionMsg: "home"})
          }
       }
 
@@ -215,13 +222,14 @@ class Todo extends React.Component {
 
       }
 
-      shouldComponentUpdate(nextState, prevState){
-          if(this.state.data.buttonState !== undefined){
-            return this.state.data.buttonState !== prevState.data.buttonState
-          } else {
-            return true
-          }
-      } 
+      endSessionOption(option){
+        updateToken(null);
+        if (option === "backhome"){
+          this.setState({endSessionMsg: "home"})
+        } else if (option === "relogin"){
+          this.setState({endSessionMsg: "login"})
+        }
+      }
 
       // a function to clear the text inside the placeholder when the input box in on focus
       onRemovePlaceholderText(){
@@ -237,9 +245,15 @@ class Todo extends React.Component {
     render(){
         
       // if the token is not valid or no longer valid, then the page should be automatically redirect to the login page
-        if (!this.state.token) {
+       /*  if (!this.state.token) {
             return <Redirect to="/" />;
-          }
+          } */
+
+        if(this.state.endSessionMsg === "login"){
+          return <Redirect to="/login" />;
+        } else if (this.state.endSessionMsg === "home"){
+          return <Redirect to="/" />;
+        }
 
         let datas = [];
         let printData;
@@ -290,6 +304,7 @@ class Todo extends React.Component {
         let placeholder;
         let errorMsg = " ";
         let counter;
+        let endSessionBox;
 
         let errMsg = css ({
           color: "red",
@@ -324,19 +339,21 @@ class Todo extends React.Component {
         let backButton = css ({
           width: "100%",
           height: "40px",
-          borderBottom: "2px solid rgb(252, 156, 11)",
+          borderBottom: "1px solid #e0e0e0",
           borderLeft: "none",
           borderTop: "none",
           borderRight: "none",
-          marginBottom: "15px",
+          paddingBottom: "8px",
           backgroundColor: "#fff",
           textAlign: "left",
           fontFamily: "'Montserrat', sans-serif",
           fontSize: "13px",
           color: "#737373",
+          marginTop: "8px",
+          verticalAlign: "middle",
           ":hover": {
             cursor: "pointer",
-            backgroundColor: "#f1f1f1",
+            backgroundColor: "#f5f5f5",
             color: "orangered",
             fontWeight: "bold",
           }
@@ -383,6 +400,20 @@ class Todo extends React.Component {
             })
         }
 
+        if (this.state.endSessionAlert){
+            endSessionBox = (<div className="container endSession">
+                                  <div className="container endSession box">
+                                      <TiWarning size="40px" />
+                                      <p>Your session has expired.</p>
+                                      <p>Please log in again to continue.</p>
+                                      <div>
+                                          <button onClick={() => {this.endSessionOption("relogin") }} >Go to login</button>
+                                          <button onClick={() => {this.endSessionOption("backhome") }} >Log out</button>
+                                      </div>
+                                  </div>
+                             </div>)
+        }
+
 
         return <div className="todoBox">
                   <Helmet>
@@ -398,7 +429,11 @@ class Todo extends React.Component {
                               <h2>Welcome, {this.state.user}</h2>
                               <hr/>
                               <p>doTodo is a general-purpose website which can be used for simple home lists. You can simply create your own to do list, mark it when it's done and remove it when you no longer need it. It's that easy!</p>
-                              <Link to ="/" ><button className={backButton}><TiHome size="16px" color= "orangered" style={{position: "relative", top: "2px", marginRight: "5px", marginLeft:"5px"}}/>Home</button></Link>
+                          </div>
+                          <div className="info-menu">
+                              <h3>Main Menu</h3>
+                              <hr/>
+                              <Link to ="/" ><button className={backButton}><TiHome size="16px" color= "orangered" style={{position: "relative", top: "2px", marginRight: "6px", marginLeft:"5px"}}/>Home</button></Link>
                               <button className={backButton} onClick={this.logout}><TiPower size="22px" color= "orangered" style={{position: "relative", top: "6px", marginRight: "3px", marginLeft:"3px"}}/>Log out</button>
                           </div>
                       </div>
@@ -429,6 +464,7 @@ class Todo extends React.Component {
                     
                   </div>
                   <Footer />
+                  {endSessionBox}
              </div>
     
   }

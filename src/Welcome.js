@@ -156,6 +156,7 @@ class Welcome extends React.Component {
           marginBottom: "50px", 
           position: "absolute",
           zIndex: "0",
+          marginTop: "50px",
         })
 
         let pText = css ({
@@ -175,7 +176,7 @@ class Welcome extends React.Component {
             //return <Redirect to="/" />;
             activeToken = this.state.user;
             pageTitle = <title>Welcome, {this.state.user}</title>
-            ctaButton = <Link to="/todo" style= {{textDecoration: "none", color: "white", fontSize: "15px", fontWeight: "bold"}}><div className={linkButton}>Jump to list!</div></Link>
+            ctaButton = <Link to="/todo" style= {{textDecoration: "none", color: "white", fontSize: "15px", fontWeight: "bold"}}><div className={linkButton}>Jump back to list!</div></Link>
             grettings = (<>   
                             <div className = "welcome-top">
                                 <img className={image} src={backgroundOnline} alt="headerimage" />
