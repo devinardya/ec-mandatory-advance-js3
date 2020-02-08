@@ -4,7 +4,6 @@ import axios from 'axios';
 import {Helmet} from "react-helmet";
 import {token$, updateToken} from './store';
 import { TiUser } from "react-icons/ti"
-import jwt from "jsonwebtoken";
 import { css } from "glamor";
 import Form from './Form';
 import Header from './Header';
@@ -24,6 +23,7 @@ class Login extends React.Component {
           valueUser: "",
           valuePass:"",
           errorMsg: "",
+          loader: false,
         };
     
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -61,12 +61,18 @@ class Login extends React.Component {
           email: this.state.email,
           password: this.state.password,
         };
+
+   /*      function waitLoading(data) {
+          return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                  // console.log(data);
+                  resolve(this.setState({loader: data}))
+              }, 500)
+          })
+      } */
     
         axios.post('http://3.120.96.16:3002/auth', authData)
           .then(response => {
-            this.setState({error: false});
-            const decoded = jwt.decode(response.data.token);
-            console.log(decoded);
             updateToken(response.data.token);
           })
           .catch(err => {
@@ -105,9 +111,15 @@ class Login extends React.Component {
     
       render() {
 
+        let loader;
+
         if (this.state.token) {
             return <Redirect to="/todo" />;
         } 
+
+        if (this.state.loader) {
+          loader = <div className ="loader"></div>
+        }
      
         let icon = css({
           width: "60px",
@@ -192,6 +204,7 @@ class Login extends React.Component {
                     <Header testItem = "welcome"/>
                     <div className="login-container">
                         <div className="box-right">
+                            {loader}
                             <TiUser color="white" className={icon}/>
                             <h3 className={textH3}>Log in</h3> 
                             {errorMsg}

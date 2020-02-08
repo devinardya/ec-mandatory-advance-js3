@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
-import {Redirect} from 'react-router-dom';
-import { TiTickOutline, TiTick, TiDelete } from "react-icons/ti"
+import {Redirect, Link} from 'react-router-dom';
+import { TiTickOutline, TiTick, TiDelete, TiHome, TiPower } from "react-icons/ti"
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
@@ -107,37 +107,41 @@ class Todo extends React.Component {
         let userInput = { content: input };
         
         //sending new data to the server with a token to make sure it saved to the right user
-        axios.post(url, userInput,{
-          headers: {
-            Authorization: `Bearer ${this.state.token}`
-          }
-        })
-        .then( response => {
-          console.log(response)
-          //this.onGetData();
-           // save the input locally to avoid the need to fetch new data from the server, hence making it lighter to load for user
-          let copyData = [...this.state.data];
-          let newData = {
-            content: response.data.todo.content,
-            id: response.data.todo.id,
-            buttonState: false,
-          } 
-
-          this.setState({ data: [...copyData, newData] , 
-                         inputError: false, 
-                         textPlaceholder: true, 
-                         input: ""})
-         
-       })
-       .catch ( err => {
-         // when error occurs, fetching the error messages from the server and save it on a local state to pass it to the render
-         console.log(err.response.data);
-         if(this.state.token){
-          this.setState({inputError: true, 
-            textPlaceholder: true,
-            errorMsg: err.response.data.details[0].message})
-         }
-       })
+            axios.post(url, userInput,{
+              headers: {
+                Authorization: `Bearer ${this.state.token}`
+              }
+            })
+            .then( response => {
+              console.log(response)
+              //this.onGetData();
+              // save the input locally to avoid the need to fetch new data from the server, hence making it lighter to load for user
+              let copyData = [...this.state.data];
+              let newData = {
+                content: response.data.todo.content,
+                id: response.data.todo.id,
+                buttonState: false,
+              } 
+    
+              this.setState({ data: [...copyData, newData] , 
+                            inputError: false, 
+                            textPlaceholder: true, 
+                            input: ""})
+            
+          })
+          .catch ( err => {
+            // when error occurs, fetching the error messages from the server
+            console.log(err.response.data);
+            
+             // if token is already expired, then unsubscribe to token and redirect to home
+            if (err.response.data.message === "Unauthorized") {
+                updateToken(null);
+            } else if (err.response.data.message === "Validation error"){ // if there is an error in input, then fetch the error message from the server
+                this.setState({inputError: true, 
+                textPlaceholder: true,
+                errorMsg: err.response.data.details[0].message})
+            }
+          })
       }
 
       //removing a spesific item inside the list by sending it's id to the server
@@ -157,6 +161,10 @@ class Todo extends React.Component {
           this.setState({data: copyData})
        }).catch(err => {
          console.log(err)
+         // if token is already expired, then unsubscribe to token and redirect to home
+         if (err.response.data.message === "Unauthorized") {
+          updateToken(null);
+         }
        })
       }
 
@@ -190,7 +198,20 @@ class Todo extends React.Component {
       componentWillUnmount(){
           this.subscribe.unsubscribe();
 
-          //this.source.cancel('Operation canceled by the user.'); 
+          let CancelToken = axios.CancelToken;
+          this.source = CancelToken.source();
+
+          axios.get(url, {
+            cancelToken: this.source.token
+          })
+          .catch(function (thrown) {
+            if (axios.isCancel(thrown)) {
+              console.log('Request canceled', thrown.message);
+            } else {
+              // handle error
+            }
+          }); 
+          this.source.cancel('Operation canceled by the user.'); 
 
       }
 
@@ -284,10 +305,10 @@ class Todo extends React.Component {
         counter = css ({
           fontSize: "12px",
           color: "#737373",
-          width: "20%",
-          height: "100%",
+          width: "calc(20% - 10px)",
+          //height: "100%",
           textAlign: "right",
-          margin: "0px",
+          margin: "0px 10px 0px 0px",
         })
 
         let errorCounter = css ({
@@ -298,6 +319,27 @@ class Todo extends React.Component {
           alignItems: "center",
           justifyContent: "space-between",
           marginBottom: "5px",
+        })
+
+        let backButton = css ({
+          width: "100%",
+          height: "40px",
+          borderBottom: "2px solid rgb(252, 156, 11)",
+          borderLeft: "none",
+          borderTop: "none",
+          borderRight: "none",
+          marginBottom: "15px",
+          backgroundColor: "#fff",
+          textAlign: "left",
+          fontFamily: "'Montserrat', sans-serif",
+          fontSize: "13px",
+          color: "#737373",
+          ":hover": {
+            cursor: "pointer",
+            backgroundColor: "#f1f1f1",
+            color: "orangered",
+            fontWeight: "bold",
+          }
         })
 
 
@@ -334,10 +376,10 @@ class Todo extends React.Component {
             counter = css ({
               fontSize: "12px",
               color: "red",
-              width: "20%",
-              height: "100%",
+              width: "calc(20% - 10px)",
+              //height: "100%",
               textAlign: "right",
-              margin: "0px",
+              margin: "0px 10px 0px 0px",
             })
         }
 
@@ -356,6 +398,8 @@ class Todo extends React.Component {
                               <h2>Welcome, {this.state.user}</h2>
                               <hr/>
                               <p>doTodo is a general-purpose website which can be used for simple home lists. You can simply create your own to do list, mark it when it's done and remove it when you no longer need it. It's that easy!</p>
+                              <Link to ="/" ><button className={backButton}><TiHome size="16px" color= "orangered" style={{position: "relative", top: "2px", marginRight: "5px", marginLeft:"5px"}}/>Home</button></Link>
+                              <button className={backButton} onClick={this.logout}><TiPower size="22px" color= "orangered" style={{position: "relative", top: "6px", marginRight: "3px", marginLeft:"3px"}}/>Log out</button>
                           </div>
                       </div>
                       <div className="content">

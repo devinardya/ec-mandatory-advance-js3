@@ -72,7 +72,20 @@ class Welcome extends React.Component {
       componentWillUnmount(){
           this.subscribe.unsubscribe();
 
-          //this.source.cancel('Operation canceled by the user.'); 
+          let CancelToken = axios.CancelToken;
+          this.source = CancelToken.source();
+
+          axios.get(url, {
+            cancelToken: this.source.token
+          })
+          .catch(function (thrown) {
+            if (axios.isCancel(thrown)) {
+              console.log('Request canceled', thrown.message);
+            } else {
+              // handle error
+            }
+          }); 
+          this.source.cancel('Operation canceled by the user.'); 
       }
 
       logout() {

@@ -181,6 +181,11 @@ footer p {
     border: 1px dashed #196ab1;
 }
 
+.info-area p {
+    margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
 .content {
     height: 100%;
     width: 70%;
@@ -407,7 +412,17 @@ footer p {
     margin: -120px 0 0 0;
     padding: 0;
     border-radius: 50% 0% 50% 50%;
+/*     animation-name: example;
+    animation-duration: 2s;
+    animation-iteration-count: infinite; */
 }
+/* 
+@keyframes example {
+    0%   { top:-120px;}
+    50%  {top:-100px;}
+    75%  {top:-120px;}
+    100% {top:-120px;}
+  } */
 
 .counter h3 {
     color: white;
@@ -427,6 +442,20 @@ footer p {
     font-size: 25px;
 }
 
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
 @media only screen and (max-height:1010px){
     .todolist {

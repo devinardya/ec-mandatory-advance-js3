@@ -20,6 +20,7 @@ class Register extends React.Component {
                       valueUser: "",
                       valuePass:"",
                       errorMsg: "",
+                      status: false,
                     };
 
         this.onSubmit = this.onSubmit.bind(this);
