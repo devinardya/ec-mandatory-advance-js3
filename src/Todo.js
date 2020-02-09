@@ -405,7 +405,7 @@ class Todo extends React.Component {
                                   <div className="container endSession box">
                                       <TiWarning size="40px" />
                                       <p>Your session has expired.</p>
-                                      <p>Please log in again to continue.</p>
+                                      <p>Please log in again to continue or log out to return to home.</p>
                                       <div>
                                           <button onClick={() => {this.endSessionOption("relogin") }} >Go to login</button>
                                           <button onClick={() => {this.endSessionOption("backhome") }} >Log out</button>
