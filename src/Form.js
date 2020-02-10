@@ -10,10 +10,6 @@ class Form extends React.Component {
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePass = this.onChangePass.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onRemovePlaceholderTextUser = this.onRemovePlaceholderTextUser.bind(this);
-        this.onShowPlacehoderTextUser = this.onShowPlacehoderTextUser.bind(this);
-        this.onRemovePlaceholderTextPass = this.onRemovePlaceholderTextPass.bind(this);
-        this.onShowPlacehoderTextPass = this.onShowPlacehoderTextPass.bind(this);
     }
 
     onChangeEmail(e) {
@@ -29,81 +25,52 @@ class Form extends React.Component {
         this.props.onSubmit();
     }
 
-    onRemovePlaceholderTextUser(){
-        this.props.onRemovePlaceholderTextUser();
-    }
-
-      onShowPlacehoderTextUser(){
-        this.props.onShowPlacehoderTextUser();
-    }
-
-    onRemovePlaceholderTextPass(){
-      this.props.onRemovePlaceholderTextPass();
-  }
-
-    onShowPlacehoderTextPass(){
-      this.props.onShowPlacehoderTextPass();
-  }
-
     render(){
 
         let submitButton;
         let input;
-      
-            if(this.props.error400){
-              input = css({
-                width: "50%",
-                height: "40px",
-                paddingLeft: "10px",
-                margin: "10px 0",
-                borderTop: "none",
-                borderLeft: "none",
-                borderRight: "none",
-                borderBottom: "4px solid #FFB200",
-                backgroundColor: "#F1F1F1",
-                fontSize: "14px",
-                border: "2px solid red",
-                color: "#737373",
-                "::placeholder": {
-                  color: "red",
-                }
-              })
-          } else if (this.props.error401){
-            input = css({
-                width: "50%",
-                height: "40px",
-                paddingLeft: "10px",
-                margin: "10px 0",
-                borderTop: "none",
-                borderLeft: "none",
-                borderRight: "none",
-                borderBottom: "4px solid #FFB200",
-                backgroundColor: "#F1F1F1",
-                fontSize: "14px",
-                border: "2px solid red",
-                color: "#737373",
-                "::placeholder": {
-                  color: "red",
-                }
-              })
-          } else {
-            input = css({
-                width: "50%",
-                height: "40px",
-                paddingLeft: "10px",
-                margin: "10px 0",
-                borderTop: "none",
-                borderLeft: "none",
-                borderRight: "none",
-                borderBottom: "4px solid #FFB200",
-                backgroundColor: "#F1F1F1",
-                fontSize: "14px",
-                color: "#737373",
-                "::placeholder": {
-                    color: "rgb(94, 94, 94)"
-                  }
-            })
-          }
+        let inputDefault = css({
+            width: "50%",
+            height: "40px",
+            paddingLeft: "10px",
+            margin: "10px 0",
+            borderTop: "none",
+            borderLeft: "none",
+            borderRight: "none",
+            borderBottom: "4px solid #FFB200",
+            backgroundColor: "#F1F1F1",
+            fontSize: "14px",
+            color: "#737373",
+        })
+
+        if(this.props.error400){
+          input = css({
+            "::placeholder": {
+              color: "red",
+            },
+            ":focus::placeholder":{
+              color: "transparent",
+            }
+          })
+      } else if (this.props.error401){
+        input = css({
+            "::placeholder": {
+              color: "red",
+            },
+            ":focus::placeholder":{
+              color: "transparent",
+            }
+          })
+      } else {
+        input = css({
+            "::placeholder": {
+                color: "rgb(94, 94, 94)"
+              },
+            ":focus::placeholder":{
+              color: "transparent",
+            }
+        })
+      }
 
           if(this.props.textContent === "Login"){
               submitButton =  css({
@@ -144,19 +111,15 @@ class Form extends React.Component {
                     <form onSubmit = {this.onSubmit}>
                         <input type="email" 
                             onChange={this.onChangeEmail} 
-                            className={input} 
-                            placeholder= {this.props.placeholderUser} 
+                            className={`${input} ${inputDefault}`} 
+                            placeholder= "name@email.com" 
                             email = {this.props.value} 
-                            onFocus={this.props.onFocusText} 
-                            onBlur={this.props.onBlurText}
                             value ={this.props.valueUser}/>
                         <input type="password" 
                             onChange={this.onChangePass} 
-                            className={input} 
-                            placeholder= {this.props.placeholderPass} 
+                            className={`${input} ${inputDefault}`} 
+                            placeholder= "password" 
                             password = {this.props.value} 
-                            onFocus={this.props.onFocusPass} 
-                            onBlur={this.props.onBlurPass}
                             value = {this.props.valuePass}/>
                         <button type="submit" className={submitButton}>{this.props.textContent}</button>
                     </form>

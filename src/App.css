@@ -156,7 +156,7 @@ footer p {
     position: absolute;
     background-color: rgb(240, 240, 240, 0.5 );
     height: 100%;
-    z-index: 999999999999999999;
+    z-index: 1;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -294,7 +294,15 @@ footer p {
     width: calc(80% - 40px);
     height: 30px;
     padding-left: 10px;
-    flex-shrink: 2;
+    border: 1px solid #dddddd,
+}
+
+.content input::placeholder {
+    color: "rgb(94, 94, 94)",
+}
+
+.content input:focus::placeholder {
+    color: transparent;
 }
 
 .content-top {

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
@@ -8,6 +9,7 @@ import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
 import Footer from './Footer';
+import FormTodo from './FormTodo';
 
 let url = 'http://3.120.96.16:3002/todos';
 
@@ -22,7 +24,6 @@ class Todo extends React.Component {
           data: [],
           inputError: false,
           idStat: false,
-          textPlaceholder: true,
           errorMsg: "",
           endSessionAlert: false,
           endSessionMsg: "",
@@ -35,8 +36,6 @@ class Todo extends React.Component {
         this.onGetData = this.onGetData.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.radioBtnChange = this.radioBtnChange.bind(this);
-        this.onRemovePlaceholderText = this.onRemovePlaceholderText.bind(this);
-        this.onShowPlacehoderText = this.onShowPlacehoderText.bind(this);
         this.endSessionOption = this.endSessionOption.bind(this);
       }
 
@@ -100,13 +99,13 @@ class Todo extends React.Component {
         this.setState({endSessionMsg: "home"})
       }
 
-      onChange(e){
-          let input = e.target.value;
+      onChange(value){
+          let input = value;
           this.setState({input});
       }
 
-      onSubmit(e){
-        e.preventDefault();
+      onSubmit(){
+        //e.preventDefault();
         console.log(this.state.input);
         let input = this.state.input;
         let userInput = { content: input };
@@ -130,7 +129,6 @@ class Todo extends React.Component {
     
               this.setState({ data: [...copyData, newData] , 
                             inputError: false, 
-                            textPlaceholder: true, 
                             input: ""})
             
           })
@@ -143,7 +141,6 @@ class Todo extends React.Component {
                 this.setState({endSessionAlert: true})
             } else if (err.response.data.message === "Validation error"){ // if there is an error in input, then fetch the error message from the server
                 this.setState({inputError: true, 
-                textPlaceholder: true,
                 errorMsg: err.response.data.details[0].message})
             }
           })
@@ -231,16 +228,6 @@ class Todo extends React.Component {
         }
       }
 
-      // a function to clear the text inside the placeholder when the input box in on focus
-      onRemovePlaceholderText(){
-          this.setState({textPlaceholder : false})
-      }
-
-      // to show the text inside the placeholder when input box is no longer on focus
-      onShowPlacehoderText(){
-        this.setState({textPlaceholder : true, inputError: false})
-      }
-      
 
     render(){
         
@@ -300,41 +287,7 @@ class Todo extends React.Component {
                      })
         }
 
-        let inputErrorMessage;
-        let placeholder;
-        let errorMsg = " ";
-        let counter;
         let endSessionBox;
-
-        let errMsg = css ({
-          color: "red",
-          margin: "0px",
-          fontSize: "12px",
-          fontWeight: "bold",
-          marginLeft: "30px",
-          width: "calc(80% - 30px)",
-          height: "calc(100% - 10px)",
-          marginBottom: "5px",
-        })
-
-        counter = css ({
-          fontSize: "12px",
-          color: "#737373",
-          width: "calc(20% - 10px)",
-          //height: "100%",
-          textAlign: "right",
-          margin: "0px 10px 0px 0px",
-        })
-
-        let errorCounter = css ({
-          display: "flex",
-          flexFlow: "row wrap",
-          height:"20px",
-          width: "80%",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "5px",
-        })
 
         let backButton = css ({
           width: "100%",
@@ -358,47 +311,6 @@ class Todo extends React.Component {
             fontWeight: "bold",
           }
         })
-
-
-        if(!this.state.textPlaceholder){
-          inputErrorMessage = null;
-          placeholder = css({
-            padding: "2px",
-          })
-        } else {
-            if(this.state.inputError){
-              inputErrorMessage = "What to do today?";
-              errorMsg =  this.state.errorMsg;
-              placeholder = css({
-                border: "2px solid red",
-                padding: "2px",
-                "::placeholder": {
-                  color: "rgb(94, 94, 94)",
-                }
-              })
-          } else {
-              inputErrorMessage = "What to do today?";
-              placeholder = css({
-                border: "px solid #dddddd",
-                padding: "2px",
-                "::placeholder": {
-                  color: "rgb(94, 94, 94)",
-                }
-              })
-          }
-        }
-
-        if (this.state.input.length > 100 || this.state.input.length === 0){
-
-            counter = css ({
-              fontSize: "12px",
-              color: "red",
-              width: "calc(20% - 10px)",
-              //height: "100%",
-              textAlign: "right",
-              margin: "0px 10px 0px 0px",
-            })
-        }
 
         if (this.state.endSessionAlert){
             endSessionBox = (<div className="container endSession">
@@ -440,20 +352,14 @@ class Todo extends React.Component {
                       <div className="content">
                           <div className="content-top">
                             <h2>YOUR TO DO LIST</h2>
-                            <span className ={errorCounter} >
-                                <p className = {errMsg}>{errorMsg}</p>
-                                <p className= {counter}>{this.state.input.length}/100</p>
-                            </span>
-                            <form onSubmit = {this.onSubmit}>
-                                <input className={placeholder} 
-                                    type="text" 
-                                    onChange= {this.onChange} 
-                                    value={this.state.input} 
-                                    placeholder= {inputErrorMessage} 
-                                    onFocus={this.onRemovePlaceholderText} 
-                                    onBlur={this.onShowPlacehoderText}/>
-                                <button className="addButton" type="submit">Add List</button>
-                            </form>
+                            <FormTodo 
+                                onChange= {this.onChange} 
+                                value={this.state.input} 
+                                errorMsg = {this.state.errorMsg}
+                                input = {this.state.input}
+                                inputError = {this.state.inputError}
+                                onSubmit = {this.onSubmit}
+                            />
                           </div>
                           <div className="todolist">
                               <ul>
@@ -464,7 +370,7 @@ class Todo extends React.Component {
                     
                   </div>
                   <Footer />
-                  {endSessionBox}
+                  {ReactDOM.createPortal(endSessionBox, document.querySelector("#root")) }
              </div>
     
   }
