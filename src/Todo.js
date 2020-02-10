@@ -4,12 +4,13 @@ import axios from 'axios';
 import {token$, updateToken} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect, Link} from 'react-router-dom';
-import { TiTickOutline, TiTick, TiDelete, TiHome, TiPower, TiWarning } from "react-icons/ti"
+import {TiHome, TiPower, TiWarning } from "react-icons/ti"
 import { css } from "glamor";
 import jwt from 'jsonwebtoken';
 import Header from './Header';
 import Footer from './Footer';
 import FormTodo from './FormTodo';
+import TheList from './TheList';
 
 let url = 'http://3.120.96.16:3002/todos';
 
@@ -242,51 +243,6 @@ class Todo extends React.Component {
           return <Redirect to="/" />;
         }
 
-        let datas = [];
-        let printData;
-
-        let icon = css({
-          color: "rgba(180, 180, 180, 0.5)", 
-          position:"relative", 
-          top: "2px",
-          right:"40px",
-          ":hover":{
-            color: "red",
-          }
-      })
-
-      // when the app has succeed on fetching the data from the server and save it to the state, then copy it to a local variable
-        
-        if (this.state.data){
-
-            //console.log("not undefined");
-            datas.push(this.state.data)
-          
-            //mapping the data to be able to render 
-            printData = datas[0].map((data) => {
-             
-              // controling which icon to use when the checklist is true or false
-              let button;
-              if (data.buttonState){
-                button = <TiTick size="25px"  style={{color: "rgb(250, 142, 0)"}}/>
-              } else {
-                button = <TiTickOutline size="25px"/>
-              }
-
-              return (<li key= {data.id}>
-                          <span className="liText" onClick={() => this.radioBtnChange(data.id)}>
-                              <span>{button}</span>
-                              <span>{data.content}</span>
-                          </span>
-                          
-                          <span className="deleteBtn">
-                              <button className={icon} onClick = {() => this.onDelete(data.id)}><TiDelete size="25px" /></button>
-                          </span>
-                      </li>
-                      )
-                     })
-        }
-
         let endSessionBox;
 
         let backButton = css ({
@@ -362,9 +318,9 @@ class Todo extends React.Component {
                             />
                           </div>
                           <div className="todolist">
-                              <ul>
-                                {printData}
-                              </ul>
+                                <TheList 
+                                  data = {this.state.data}
+                                />
                           </div>
                       </div>
                     

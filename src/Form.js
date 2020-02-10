@@ -45,8 +45,10 @@ class Form extends React.Component {
 
         if(this.props.error400){
           input = css({
+            border: "2px solid red",
             "::placeholder": {
               color: "red",
+              
             },
             ":focus::placeholder":{
               color: "transparent",
@@ -54,8 +56,10 @@ class Form extends React.Component {
           })
       } else if (this.props.error401){
         input = css({
+            border: "2px solid red",
             "::placeholder": {
               color: "red",
+             
             },
             ":focus::placeholder":{
               color: "transparent",

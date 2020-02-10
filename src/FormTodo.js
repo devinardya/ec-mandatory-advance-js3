@@ -65,7 +65,7 @@ class FormTodo extends React.Component {
               }
             })
         } else {
-          
+            errorMsg =  " ";
             placeholder = css({
               border: "px solid #dddddd",
               padding: "2px",

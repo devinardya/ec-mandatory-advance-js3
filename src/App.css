@@ -294,11 +294,11 @@ footer p {
     width: calc(80% - 40px);
     height: 30px;
     padding-left: 10px;
-    border: 1px solid #dddddd,
+    border: 1px solid #dddddd;
 }
 
 .content input::placeholder {
-    color: "rgb(94, 94, 94)",
+     color: "rgb(94, 94, 94)";
 }
 
 .content input:focus::placeholder {
@@ -496,24 +496,21 @@ footer p {
     margin: -80px 0 0 0;
     padding: 0;
     border-radius: 50% 0% 50% 50%;
-/*     animation-name: example;
-    animation-duration: 2s;
-    animation-iteration-count: infinite; */
+    animation: example 6s ease-in-out infinite;
 }
-/* 
-@keyframes example {
-    0%   { top:-120px;}
-    50%  {top:-100px;}
-    75%  {top:-120px;}
-    100% {top:-120px;}
-  } */
 
-.counter h3 {
+@keyframes example {
+    0%   { transform: translateY(0px);}
+    50%  { transform: translateY(-10px);}
+    100% { transform: translateY(0px); }
+  } 
+
+.counter > h3 {
     color: white;
-    font-size: 100px;
+    font-size: 120px;
     position: absolute;
     top: 50%;
-    transform: translate(0, -125%);
+    transform: translate(0, -150%);
     
 }
 
