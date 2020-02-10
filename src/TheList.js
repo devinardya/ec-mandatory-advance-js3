@@ -4,7 +4,20 @@ import { css } from "glamor";
 
 class TheList extends React.Component {
     constructor(props){
-        super(props)
+        super(props);
+
+        this.onDelete = this.onDelete.bind(this);
+        this.radioBtnChange = this.radioBtnChange.bind(this);
+    }
+
+    onDelete(id){
+        this.props.onDelete(id);
+    }
+
+     // a function to control the checklist button correspon to every item on the list.
+     radioBtnChange(index){
+      this.props.radioBtnChange(index)
+
     }
 
     render(){

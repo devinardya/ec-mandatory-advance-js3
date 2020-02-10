@@ -320,6 +320,8 @@ class Todo extends React.Component {
                           <div className="todolist">
                                 <TheList 
                                   data = {this.state.data}
+                                  onDelete = {this.onDelete}
+                                  radioBtnChange = {this.radioBtnChange}
                                 />
                           </div>
                       </div>
