@@ -47,18 +47,6 @@ class Header extends React.PureComponent{
             top: "3px"
         })
 
-       /*  let iconLogo = css({
-            width: "20px",
-            height: "20px",
-            backgroundColor: "#196ab1",
-            borderRadius: "50%",
-            padding: "5px",
-            marginBottom: "0px",
-            marginRight: "5px",
-            position: "relative",
-            top: "7px"
-        }) */
-
         console.log("render from header")
 
         let buttonOne;

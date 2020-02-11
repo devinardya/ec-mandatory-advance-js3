@@ -37,8 +37,8 @@ class Login extends React.Component {
       componentWillUnmount() {
         this.subscription.unsubscribe();
       }
-    
-      onChangeEmail(value) {
+
+     onChangeEmail(value) {
         this.setState({email: value, valueUser: value});
       }
     
@@ -148,12 +148,14 @@ class Login extends React.Component {
                                 error400 = {this.state.error400}
                                 error401 = {this.state.error401}
                                 email = {this.state.email} 
-                                onChangeEmail = {this.onChangeEmail} 
+                                onChangeEmail = {this.onChangeEmail}
                                 valueUser = {this.state.valueUser} 
                                 password = {this.state.password} 
-                                onChangePass = {this.onChangePass} 
+                                onChangePass = {this.onChangePass}
                                 valuePass =  {this.state.valuePass} 
                                 textContent = "Login"
+                                onChange = {this.onChange}
+                                namePass = "password"
                             />
                             <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Sign up here!</Link></span></p>
                         </div>

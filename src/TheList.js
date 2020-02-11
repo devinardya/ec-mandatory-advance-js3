@@ -17,7 +17,6 @@ class TheList extends React.Component {
      // a function to control the checklist button correspon to every item on the list.
      radioBtnChange(index){
       this.props.radioBtnChange(index)
-
     }
 
     render(){

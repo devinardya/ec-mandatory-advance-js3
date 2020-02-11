@@ -24,6 +24,7 @@ class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onChangePass = this.onChangePass.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+    
     }
 
     onChangeEmail(value) {
@@ -33,6 +34,7 @@ class Register extends React.Component {
     onChangePass(value) {
       this.setState({password: value, valuePass: value});
     }
+
 
     onSubmit(){
         //e.preventDefault();
@@ -131,7 +133,7 @@ class Register extends React.Component {
                                 onChangeEmail = {this.onChangeEmail} 
                                 valueUser = {this.state.valueUser} 
                                 password = {this.state.password} 
-                                onChangePass = {this.onChangePass} 
+                                onChangePass = {this.onChangePass}
                                 valuePass =  {this.state.valuePass} 
                                 textContent = "Create Account"
                             />

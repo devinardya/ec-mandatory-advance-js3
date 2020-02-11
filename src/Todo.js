@@ -328,7 +328,7 @@ class Todo extends React.Component {
                     
                   </div>
                   <Footer />
-                  {ReactDOM.createPortal(endSessionBox, document.querySelector("#root")) }
+                  {ReactDOM.createPortal(endSessionBox, document.querySelector("#root"))}
              </div>
     
   }

@@ -18,7 +18,7 @@ class Form extends React.Component {
     
     onChangePass(e) {
         this.props.onChangePass(e.target.value);
-    }
+    } 
 
     onSubmit(e){
         e.preventDefault();
@@ -76,39 +76,35 @@ class Form extends React.Component {
         })
       }
 
-          if(this.props.textContent === "Login"){
-              submitButton =  css({
-                color: 'white',
-                fontWeight: "bold",
-                fontSize: "13px",
-                width: "51%",
-                height: "40px", 
-                margin: "20px 0",
-                border: "none",
-                backgroundColor: "#FFAA00",
-                ':hover': {
-                  backgroundColor: "#FFC500",
-                  cursor: "pointer",
-                  color: "white"
-                },
-              })
-          } else {
-              submitButton = css({
-                color: 'white',
-                fontWeight: "bold",
-                fontSize: "13px",
-                width: "51%",
-                height: "40px", 
-                margin: "20px 0",
-                border: "none",
-                backgroundColor: "#196ab1",
-                ':hover': {
-                  backgroundColor: "#1c9bfa",
-                  cursor: "pointer",
-                  color: "white"
-                },
-              })
-          }
+      let submitDefault = css ({
+          color: 'white',
+          fontWeight: "bold",
+          fontSize: "13px",
+          width: "51%",
+          height: "40px", 
+          margin: "20px 0",
+          border: "none",
+      })
+
+        if(this.props.textContent === "Login"){
+            submitButton =  css({
+              backgroundColor: "#FFAA00",
+              ':hover': {
+                backgroundColor: "#FFC500",
+                cursor: "pointer",
+                color: "white"
+              },
+            })
+        } else {
+            submitButton = css({
+              backgroundColor: "#196ab1",
+              ':hover': {
+                backgroundColor: "#1c9bfa",
+                cursor: "pointer",
+                color: "white"
+              },
+            })
+        }
           
 
         return ( <>
@@ -120,12 +116,13 @@ class Form extends React.Component {
                             email = {this.props.value} 
                             value ={this.props.valueUser}/>
                         <input type="password" 
-                            onChange={this.onChangePass} 
+                            name = {this.props.namePass}
+                            onChange={this.onChangePass}
                             className={`${input} ${inputDefault}`} 
                             placeholder= "password" 
                             password = {this.props.value} 
                             value = {this.props.valuePass}/>
-                        <button type="submit" className={submitButton}>{this.props.textContent}</button>
+                        <button type="submit" className={`${submitButton} ${submitDefault}`}>{this.props.textContent}</button>
                     </form>
                  </>
         )
