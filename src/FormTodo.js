@@ -30,7 +30,7 @@ class FormTodo extends React.Component {
             fontSize: "12px",
             fontWeight: "bold",
             marginLeft: "30px",
-            width: "calc(80% - 30px)",
+            width: "calc(90% - 30px)",
             height: "calc(100% - 10px)",
             marginBottom: "5px",
           })
@@ -38,10 +38,10 @@ class FormTodo extends React.Component {
           counter = css ({
             fontSize: "12px",
             color: "#737373",
-            width: "calc(20% - 10px)",
+            width: "calc(10% - 10px)",
             //height: "100%",
             textAlign: "right",
-            margin: "0px 10px 0px 0px",
+            margin: "0px 0px 0px 0px",
           })
   
           let errorCounter = css ({
@@ -67,7 +67,7 @@ class FormTodo extends React.Component {
         } else {
             errorMsg =  " ";
             placeholder = css({
-              border: "px solid #dddddd",
+              border: "1px solid #dddddd",
               padding: "2px",
               "::placeholder": {
                 color: "rgb(94, 94, 94)",
@@ -80,9 +80,9 @@ class FormTodo extends React.Component {
             counter = css ({
               fontSize: "12px",
               color: "red",
-              width: "calc(20% - 10px)",
+              width: "calc(10% - 10px)",
               textAlign: "right",
-              margin: "0px 10px 0px 0px",
+              margin: "0px 0px 0px 0px",
             })
         }
 

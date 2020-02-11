@@ -23,7 +23,7 @@
     background-color: #ffffff;
 }
 
-.register-box form, .login-box form {
+.register-box > form, .login-box > form {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -41,7 +41,7 @@ footer {
     color: #737373;
 }
 
-footer p {
+footer > p {
     margin: 0 0 10px 0;
     padding: 0;
     font-size: 12px;
@@ -101,7 +101,7 @@ footer p {
     font-weight: bold;
 }
 
-.header span {
+.header > span {
     color: orange;
     font-weight: bold;
 }
@@ -123,7 +123,7 @@ footer p {
     cursor: pointer;
 }
 
-.header-left h3 {
+.header-left > h3 {
     color: #196ab1;
     font-size: 30px;
     font-family: 'Poppins', sans-serif;
@@ -177,16 +177,16 @@ footer p {
     box-shadow: 0px 12px 26px -6px rgba(0,0,0,0.53);
 }
 
-.container.endSession.box p:first-of-type{
+.container.endSession.box > p:first-of-type{
     margin-bottom: 0px;
 }
 
-.container.endSession.box p:last-of-type{
+.container.endSession.box > p:last-of-type{
     margin-top: 5px;
     font-size: 13px;
 }
 
-.container.endSession.box button {
+.container.endSession.box > button {
     width: 175px;
     height: 40px;
     margin: 5px;
@@ -203,7 +203,7 @@ footer p {
     filter: contrast(200%);
 }
 
-.container.endSession.box button:first-child {
+.container.endSession.box > button:first-child {
     background-color: rgb(252, 156, 11);
 }
 
@@ -227,18 +227,18 @@ footer p {
     line-height: 23px;
 }
 
-.info-area h2, .info-menu h3 {
+.info-area > h2, .info-menu > h3 {
     margin-top: 0;
     color: orangered;
     line-height: 25px;
     font-family: 'Montserrat', sans-serif;
 }
 
-.info-area hr, .info-menu hr {
+.info-area > hr, .info-menu > hr {
     border: 1px dashed #196ab1;
 }
 
-.info-area p {
+.info-area > p {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -246,15 +246,15 @@ footer p {
     margin: 0;
 }
 
-.info-menu a button{
+.info-menu > a > button{
     padding-bottom: 0;
 }
 
-.info-menu button:hover {
+.info-menu > button:hover {
     cursor: pointer;
 }
 
-.info-menu h3::before{
+.info-menu > h3::before{
     content: ".";
     background-color: orangered;
     margin-right: 5px;
@@ -294,19 +294,17 @@ footer p {
     width: calc(80% - 40px);
     height: 30px;
     padding-left: 10px;
-    border: 1px solid #dddddd;
 }
 
-.content input::placeholder {
+.content > input::placeholder {
      color: "rgb(94, 94, 94)";
 }
 
-.content input:focus::placeholder {
+.content > input:focus::placeholder {
     color: transparent;
 }
 
 .content-top {
-  /*  background-color: rgb(247, 247, 247);*/
     width: 95%;
     z-index: 999999999999;
     max-height: 605px;
@@ -422,13 +420,13 @@ footer p {
     width: 54%;
 }
 
-.welcome-container h1 {
+.welcome-container > h1 {
     font-family: 'Poppins', sans-serif;
     letter-spacing: -3px;
     color: #196ab1;
 }
 
-.welcome-container h2 {
+.welcome-container > h2 {
     font-size: 30px;
     margin: 0 0 50px 0;
     color: rgb(252, 156, 11);
@@ -460,7 +458,7 @@ footer p {
     margin: 50px 20px 0 15px;
 }
 
-.welcome-sidebar p {
+.welcome-sidebar > p {
     width: 100px;
     height: 100px;
     font-size: 60px;
@@ -505,12 +503,13 @@ footer p {
     100% { transform: translateY(0px); }
   } 
 
-.counter > h3 {
+.counter h3 {
     color: white;
     font-size: 120px;
     position: absolute;
     top: 50%;
-    transform: translate(0, -150%);
+    left: 50%;
+    transform: translate(-50%, -150%);
     
 }
 
@@ -521,6 +520,7 @@ footer p {
 
 .welcome-textbox h3 {
     font-size: 25px;
+    margin-top: 40px;
 }
 
 
