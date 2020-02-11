@@ -119,7 +119,6 @@ class Todo extends React.Component {
             })
             .then( response => {
               console.log(response)
-              //this.onGetData();
               // save the input locally to avoid the need to fetch new data from the server, hence making it lighter to load for user
               let copyData = [...this.state.data];
               let newData = {
@@ -156,7 +155,6 @@ class Todo extends React.Component {
         })
         .then( response => {
           console.log(response)
-          //this.onGetData();
           //delete the data locally, to avoid calling the server 
           const listIndex = this.state.data.findIndex (x => x.id === id);
           let copyData = [...this.state.data]
@@ -166,7 +164,6 @@ class Todo extends React.Component {
          console.log(err)
          // if token is already expired, then unsubscribe to token and redirect to home
          if (err.response.data.message === "Unauthorized") {
-           //updateToken(null);
            this.setState({endSessionAlert: true})
          }
        })

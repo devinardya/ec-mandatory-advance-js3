@@ -18,14 +18,12 @@ class Login extends React.Component {
           error401: false,
           error400: false,
           token: token$.value,
-          valueUser: "",
-          valuePass:"",
+          value: "",
           errorMsg: "",
         };
     
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePass = this.onChangePass.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
       }
     
       componentDidMount() {
@@ -38,12 +36,11 @@ class Login extends React.Component {
         this.subscription.unsubscribe();
       }
 
-     onChangeEmail(value) {
-        this.setState({email: value, valueUser: value});
-      }
-    
-      onChangePass(value) {
-        this.setState({password: value, valuePass: value});
+      onChange(value, name){
+        this.setState({
+          [name]:value,
+          value: value,
+        })
       }
 
       // submitting user data to server and in return getting a new login token to be save in localStorage
@@ -148,14 +145,10 @@ class Login extends React.Component {
                                 error400 = {this.state.error400}
                                 error401 = {this.state.error401}
                                 email = {this.state.email} 
-                                onChangeEmail = {this.onChangeEmail}
-                                valueUser = {this.state.valueUser} 
                                 password = {this.state.password} 
-                                onChangePass = {this.onChangePass}
-                                valuePass =  {this.state.valuePass} 
                                 textContent = "Login"
                                 onChange = {this.onChange}
-                                namePass = "password"
+                                value = {this.state.value}
                             />
                             <p className={pText}>Don't have an account? <span><Link to="/register" className={pTextSpan}>Sign up here!</Link></span></p>
                         </div>

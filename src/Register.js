@@ -15,29 +15,25 @@ class Register extends React.Component {
         this.state = {email: "",
                       password: "",
                       error400: false,
-                      valueUser: "",
-                      valuePass:"",
                       errorMsg: "",
+                      value: "",
                       status: false,
                     };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChangePass = this.onChangePass.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChange = this.onChange.bind(this);
     
     }
 
-    onChangeEmail(value) {
-      this.setState({email: value, valueUser: value});
+    onChange(value, name){
+      this.setState({
+        [name]:value,
+        value: value,
+      })
     }
-  
-    onChangePass(value) {
-      this.setState({password: value, valuePass: value});
-    }
-
 
     onSubmit(){
-        //e.preventDefault();
+
         let newInput = {email : this.state.email, 
                         password: this.state.password};
 
@@ -130,11 +126,9 @@ class Register extends React.Component {
                                 error400 = {this.state.error400}
                                 error401 = {this.state.error401}
                                 email = {this.state.email} 
-                                onChangeEmail = {this.onChangeEmail} 
-                                valueUser = {this.state.valueUser} 
+                                onChange = {this.onChange} 
+                                value = {this.state.value} 
                                 password = {this.state.password} 
-                                onChangePass = {this.onChangePass}
-                                valuePass =  {this.state.valuePass} 
                                 textContent = "Create Account"
                             />
                             <p className={pText}>Already have an account? <span><Link to="/login" className={pTextSpan}>Login here!</Link></span></p>

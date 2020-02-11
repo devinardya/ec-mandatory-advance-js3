@@ -7,18 +7,13 @@ class Form extends React.Component {
     constructor(props){
         super(props);
 
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePass = this.onChangePass.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
-    onChangeEmail(e) {
-        this.props.onChangeEmail(e.target.value);
+    onChange(e){
+      this.props.onChange(e.target.value, e.target.name)
     }
-    
-    onChangePass(e) {
-        this.props.onChangePass(e.target.value);
-    } 
 
     onSubmit(e){
         e.preventDefault();
@@ -110,18 +105,19 @@ class Form extends React.Component {
         return ( <>
                     <form onSubmit = {this.onSubmit}>
                         <input type="email" 
-                            onChange={this.onChangeEmail} 
+                            onChange={this.onChange} 
                             className={`${input} ${inputDefault}`} 
                             placeholder= "name@email.com" 
-                            email = {this.props.value} 
-                            value ={this.props.valueUser}/>
+                            email = {this.props.email} 
+                            value ={this.props.email}
+                            name = "email"/>
                         <input type="password" 
-                            name = {this.props.namePass}
-                            onChange={this.onChangePass}
+                            name = "password"
+                            onChange={this.onChange}
                             className={`${input} ${inputDefault}`} 
                             placeholder= "password" 
-                            password = {this.props.value} 
-                            value = {this.props.valuePass}/>
+                            password = {this.props.password} 
+                            value = {this.props.password}/>
                         <button type="submit" className={`${submitButton} ${submitDefault}`}>{this.props.textContent}</button>
                     </form>
                  </>
