@@ -119,7 +119,7 @@ class Register extends React.Component {
                     <Helmet>
                           <title>doTodo - Sign Up</title>
                     </Helmet>
-                    <Header testItem = "welcome"/>
+                    <Header testItem = "signup"/>
                     <div className="login-container">
                         <div className="box-right">
                             <TiUserAdd color="white" className={icon}/> 

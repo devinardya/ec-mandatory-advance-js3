@@ -57,10 +57,14 @@ class Header extends React.PureComponent{
             homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;
             buttonOne =  <p className="loginUser">{this.props.user}</p>;
             buttonTwo =  <button onClick={this.props.logout} className="logoutButton">Log out</button>;
-        } else if (this.props.testItem === "welcome"){
+        } else if (this.props.testItem === "signup"){
             homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;
-            buttonOne = <p className="loginUser"><Link to="/register" className={pTextSpan}>Sign up</Link></p>;
+            buttonOne = <p className="loginUser"><Link to="/" className={pTextSpan}>Home</Link></p>;
             buttonTwo = <p className="logoutButton"><Link to="/login" className={pTextSpan}>Log in</Link></p>;
+        }  else if (this.props.testItem === "login"){
+            homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;
+            buttonOne = <p className="loginUser"><Link to="/" className={pTextSpan}>Home</Link></p>;
+            buttonTwo = <p className="logoutButton"><Link to="/register" className={pTextSpan}>Sign up</Link></p>;
         } else if (this.props.testItem === "home"){
             if (this.props.activeToken === "Register"){
                 homeButton = <h3><Link to="/" className={h3TextSpan}> <TiInputChecked color="white" className={icon}/>doToDo</Link></h3>;

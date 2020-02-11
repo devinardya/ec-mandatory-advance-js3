@@ -137,7 +137,7 @@ class Login extends React.Component {
                     <Helmet>
                           <title>doTodo - Log in</title>
                     </Helmet>
-                    <Header testItem = "welcome"/>
+                    <Header testItem = "login"/>
                     <div className="login-container">
                         <div className="box-right">
                             <TiUser color="white" className={icon}/>
