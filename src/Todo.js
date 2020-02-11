@@ -89,8 +89,7 @@ class Todo extends React.Component {
           .catch(e => {
             
             console.error(e);
-            updateToken(null);
-            this.setState({endSessionMsg: "home"})
+            this.setState({endSessionAlert: true})
           });
       }
 
@@ -99,6 +98,8 @@ class Todo extends React.Component {
         updateToken(null);
         this.setState({endSessionMsg: "home"})
       }
+
+      // the function to track the user input on the to do list form
 
       onChange(value){
           let input = value;
@@ -136,7 +137,7 @@ class Todo extends React.Component {
             // when error occurs, fetching the error messages from the server
             console.log(err.response.data);
             
-             // if token is already expired, then unsubscribe to token and redirect to home
+             // if token is already expired, then unsubscribe to token and show the dialog menu
             if (err.response.data.message === "Unauthorized") {
                 this.setState({endSessionAlert: true})
             } else if (err.response.data.message === "Validation error"){ // if there is an error in input, then fetch the error message from the server
@@ -162,7 +163,7 @@ class Todo extends React.Component {
           this.setState({data: copyData})
        }).catch(err => {
          console.log(err)
-         // if token is already expired, then unsubscribe to token and redirect to home
+         // if token is already expired, then unsubscribe to token and show the dialog menu
          if (err.response.data.message === "Unauthorized") {
            this.setState({endSessionAlert: true})
          }
@@ -191,8 +192,8 @@ class Todo extends React.Component {
   
       componentDidUpdate(){
         if (!this.state.token){
-          updateToken(null);
-          this.setState({endSessionMsg: "home"})
+          //updateToken(null);
+          this.setState({endSessionAlert: true})
          }
       }
 
@@ -209,14 +210,13 @@ class Todo extends React.Component {
           .catch(function (thrown) {
             if (axios.isCancel(thrown)) {
               console.log('Request canceled', thrown.message);
-            } else {
-              // handle error
-            }
+            } 
           }); 
           this.source.cancel('Operation canceled by the user.'); 
 
       }
 
+      // the function to set the link to redirect
       endSessionOption(option){
         updateToken(null);
         if (option === "backhome"){
@@ -228,11 +228,6 @@ class Todo extends React.Component {
 
 
     render(){
-        
-      // if the token is not valid or no longer valid, then the page should be automatically redirect to the login page
-       /*  if (!this.state.token) {
-            return <Redirect to="/" />;
-          } */
 
         if(this.state.endSessionMsg === "login"){
           return <Redirect to="/login" />;
@@ -265,7 +260,9 @@ class Todo extends React.Component {
           }
         })
 
+        console.log(this.state.endSessionAlert)
         if (this.state.endSessionAlert){
+          console.log("alert true")
             endSessionBox = (<div className="container endSession">
                                   <div className="container endSession box">
                                       <TiWarning size="40px" />

@@ -86,9 +86,6 @@ class FormTodo extends React.Component {
             })
         }
 
-         
-
-
         return (<>
                     <span className ={errorCounter} >
                         <p className = {errMsg}>{errorMsg}</p>
