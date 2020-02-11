@@ -23,7 +23,7 @@
     background-color: #ffffff;
 }
 
-.register-box > form, .login-box > form {
+.register-box form, .login-box form {
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
