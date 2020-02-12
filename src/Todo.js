@@ -260,7 +260,6 @@ class Todo extends React.Component {
           }
         })
 
-        console.log(this.state.endSessionAlert)
         if (this.state.endSessionAlert){
           console.log("alert true")
             endSessionBox = (<div className="container endSession">
@@ -322,7 +321,7 @@ class Todo extends React.Component {
                     
                   </div>
                   <Footer />
-                  {ReactDOM.createPortal(endSessionBox, document.querySelector("#root"))}
+                  {ReactDOM.createPortal(endSessionBox, document.body)}
              </div>
     
   }
