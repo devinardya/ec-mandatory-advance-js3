@@ -1,4 +1,5 @@
 {
+  "homepage": "http://devinardya.github.io/todoapp",
   "name": "todoapp",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +19,8 @@
     "rxjs": "^6.5.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -39,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "css-loader": "^3.4.2"
+    "css-loader": "^3.4.2",
+    "gh-pages": "^2.2.0"
   }
 }
