@@ -9,8 +9,8 @@ import jwt from 'jsonwebtoken';
 import Header from './Header';
 import Footer from './Footer';
 //import headerimage from './header-image.jpg';
-import background from './background.png';
-import backgroundOnline from './background-online.png';
+import background from './images/Wireframe.svg';
+import backgroundOnline from './images/Whiteboard.svg';
 
 let url = 'http://3.120.96.16:3002/todos';
 
@@ -151,7 +151,7 @@ class Welcome extends React.Component {
         })
 
         let image = css({
-          height: "55%",
+          height: "60%",
           objectFit: "cover",
           marginBottom: "50px", 
           position: "absolute",

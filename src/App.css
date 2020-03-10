@@ -528,7 +528,7 @@ footer > p {
 }
 
 
-@media only screen and (max-height:1010px){
+@media only screen and (max-height:1040px){
     .todolist {
         height: 65%;
     }
