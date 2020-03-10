@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import {token$, updateToken} from './store';
+import {token$, updateToken, clearFavorites} from './store';
 import {Helmet} from "react-helmet";
 import {Redirect, Link} from 'react-router-dom';
 import {TiHome, TiPower, TiWarning } from "react-icons/ti"
@@ -96,6 +96,7 @@ class Todo extends React.Component {
       // a function that called when log out, sending null parameter to the store.js that remove the token, hence making it not valid any longer
       logout() {
         updateToken(null);
+        clearFavorites(null);
         this.setState({endSessionMsg: "home"})
       }
 
@@ -147,6 +148,7 @@ class Todo extends React.Component {
           })
       }
 
+   
       //removing a spesific item inside the list by sending it's id to the server
       onDelete(id){
         axios.delete( 'http://3.120.96.16:3002/todos/'+ id, {

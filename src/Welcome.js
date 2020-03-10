@@ -151,7 +151,7 @@ class Welcome extends React.Component {
         })
 
         let image = css({
-          height: "60%",
+          height: "55%",
           objectFit: "cover",
           marginBottom: "50px", 
           position: "absolute",

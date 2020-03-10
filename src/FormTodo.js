@@ -6,7 +6,7 @@ class FormTodo extends React.Component {
         super(props);
 
         this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     onChange(e) {
@@ -17,6 +17,8 @@ class FormTodo extends React.Component {
         e.preventDefault();
         this.props.onSubmit();
     }
+
+
 
     render(){
 

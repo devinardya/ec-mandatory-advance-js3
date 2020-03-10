@@ -1,4 +1,6 @@
 import React from 'react';
+import { toggleFavorite } from './store';
+import { favorites$ } from "./store";
 import { TiTickOutline, TiTick, TiDelete} from "react-icons/ti"
 import { css } from "glamor";
 
@@ -6,8 +8,14 @@ class TheList extends React.Component {
     constructor(props){
         super(props);
 
+        this.state = {
+          favorite: favorites$.value,
+        }
+
         this.onDelete = this.onDelete.bind(this);
-        this.radioBtnChange = this.radioBtnChange.bind(this);
+        //this.radioBtnChange = this.radioBtnChange.bind(this);
+        this.handleFav = this.handleFav.bind(this);
+
     }
 
     onDelete(id){
@@ -15,9 +23,28 @@ class TheList extends React.Component {
     }
 
      // a function to control the checklist button correspon to every item on the list.
-     radioBtnChange(index){
+   /*   radioBtnChange(index){
       this.props.radioBtnChange(index)
-    }
+    } */
+
+    handleFav = (doc) => {
+      toggleFavorite(doc);
+    };
+
+    componentDidMount() {
+   
+      this.subscribe = favorites$.subscribe(favorite => {
+        console.log(favorite)
+        this.setState({favorite})
+      });
+
+      console.log(this.state.favorite)
+
+  }
+
+  componentWillUnmount() {
+      this.subscribe.unsubscribe();
+  }
 
     render(){
         let printData;
@@ -50,8 +77,10 @@ class TheList extends React.Component {
               }
     
               return (<li key= {data.id}>
-                          <span className="liText" onClick={() => this.radioBtnChange(data.id)}>
-                              <span>{button}</span>
+                          <span className="liText" onClick={() => this.handleFav(data)}>
+                          {this.state.favorite.find(x => x.id === data.id)
+                              ? <span><TiTick size="20px" style={{ color: "rgb(250, 142, 0)", position: "relative", top: "3px" }} /></span>
+                              : <span><TiTickOutline size="20px" style={{ position: "relative", top: "3px" }} /></span>}
                               <span>{data.content}</span>
                           </span>
                           

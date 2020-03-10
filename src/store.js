@@ -13,3 +13,25 @@ export function updateToken(token) {
   }
   token$.next(token);
 }
+
+export const favorites$ = new BehaviorSubject(JSON.parse(localStorage.getItem('favorites') || '[]'));
+
+export function toggleFavorite(doc) {
+  console.log(doc)
+	const newFavorites = [ ...favorites$.value ]; // to copy the array from localstorage
+	if (newFavorites.find((x) => x.id === doc.id)) {
+		// check if its in the array
+		let altered = newFavorites.filter((x) => x.id !== doc.id); //then remove
+		localStorage.setItem('favorites', JSON.stringify(altered));
+		favorites$.next(altered); // update localstorage
+	} else {
+		newFavorites.push(doc); // if there is not then push
+		localStorage.setItem('favorites', JSON.stringify(newFavorites));
+		favorites$.next(newFavorites);
+	}
+}
+
+export function clearFavorites() {
+	favorites$.next([]);
+  localStorage.removeItem("favorites");
+}
